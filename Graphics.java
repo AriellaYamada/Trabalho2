@@ -19,14 +19,42 @@ import javafx.scene.layout.VBox;
 public class Graphics {
 
     public Button[] btn = new Button[9];
-    /*public Button field2 = new Button();
-    public Button field3 = new Button();
-    public Button field4 = new Button();
-    public Button field5 = new Button();
-    public Button field6 = new Button();
-    public Button field7 = new Button();
-    public Button field8 = new Button();
-    public Button field9 = new Button();*/
+   
+    public String response;
+    
+    public Graphics() {
+        
+        for (int i = 0; i < 9; i++) {
+            btn[i] = new Button();
+        }
+        btn[0].setOnAction(event -> {
+            response = "field0";
+        });
+        btn[1].setOnAction(event -> {
+            response = "field1";
+        });
+        btn[2].setOnAction(event -> {
+            response = "field2";
+        });
+        btn[3].setOnAction(event -> {
+            response = "field3";
+        });
+        btn[4].setOnAction(event -> {
+            response = "field4";
+        });
+        btn[5].setOnAction(event -> {
+            response = "field5";
+        });
+        btn[6].setOnAction(event -> {
+            response = "field6";
+        });
+        btn[7].setOnAction(event -> {
+            response = "field7";
+        });
+        btn[8].setOnAction(event -> {
+            response = "field8";
+        });
+    }
 
     public Scene Game() {
 
@@ -36,6 +64,7 @@ public class Graphics {
         
         this.DisableAll();
 
+        
         VBox column1 = new VBox(10);
         column1.setAlignment(Pos.CENTER);
         //column1.getChildren().addAll(btn[]);
@@ -62,51 +91,7 @@ public class Graphics {
         for (int i = 0; i < 9; i++) {
             btn[i].setDisable(false);
         }
-        
-        
-        
-        /*field2.setDisable(true);
-        field3.setDisable(true);
-        field4.setDisable(true);
-        field5.setDisable(true);
-        field6.setDisable(true);
-        field7.setDisable(true);
-        field8.setDisable(true);
-        field9.setDisable(true);*/
     }
-/*
-    private void ActiveButton (int nbutton) {
-      
-        switch(nbutton) {
-                    case 0:
-                        field1.setDisable(false);
-                        break;
-                    case 1:
-                        field2.setDisable(false);
-                        break;
-                    case 2:
-                        field3.setDisable(false);
-                        break;
-                    case 3:
-                        field4.setDisable(false);
-                        break;
-                    case 4:
-                        field5.setDisable(false);
-                        break;
-                    case 5:
-                        field6.setDisable(false);
-                        break;
-                    case 6:
-                        field7.setDisable(false);
-                        break;
-                    case 7:
-                        field8.setDisable(false);
-                        break;
-                    case 8:
-                        field9.setDisable(false);
-                        break;
-                }
-    }*/
     
     public void UpdateButtons (int round[]) {
         
@@ -118,5 +103,7 @@ public class Graphics {
             }
         }
     }
+    
+   
     
 }

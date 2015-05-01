@@ -5,15 +5,29 @@
  */
 package trabalho2;
 
+import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
 /**
  *
  * @author ariellayamada
  */
-public class Game {
+public class Game{
     
     public int matrix;
     public int nrounds;
     public int draw;
+    
+    Graphics g = new Graphics();
+    
+   
+    
+    
     
     
     
