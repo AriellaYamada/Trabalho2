@@ -5,8 +5,10 @@
  */
 package trabalho2;
 
+import com.sun.corba.se.spi.activation.Server;
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 /**
  *
@@ -14,9 +16,29 @@ import java.net.ServerSocket;
  */
 public class Comm {
     
+    Socket client;
+    ServerSocket server;
+    
     public void CreateServer() throws IOException {
         
-        ServerSocket server = new ServerSocket(12345);
+        server = new ServerSocket(12345);
+        System.out.printf("Servidor criado");
+        client = server.accept();
         
+    }
+    
+    public void CreateClient(String ip, int port) throws IOException {
+        
+        client = new Socket(ip, port); 
+        
+    }
+    
+    public void CloseConnectionServer () throws IOException {
+        server.close();
+        client.close();
+    }
+    
+    public void CloseConnectionClient () throws IOException {
+        client.close();
     }
 }

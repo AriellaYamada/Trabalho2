@@ -63,6 +63,8 @@ public class Graphics {
             btn[i].setDisable(false);
         }
         
+        
+        
         /*field2.setDisable(true);
         field3.setDisable(true);
         field4.setDisable(true);
