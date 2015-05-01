@@ -1,11 +1,13 @@
 package trabalho2;
 
+import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,7 +18,7 @@ import javafx.scene.layout.VBox;
  *
  * @author ariellayamada
  */
-public class Graphics {
+public class Graphics extends Application{
 
     public Button[] btn = new Button[9];
    
@@ -24,36 +26,41 @@ public class Graphics {
     
     public Graphics() {
         
+        //Cria os botões
         for (int i = 0; i < 9; i++) {
             btn[i] = new Button();
         }
+        
+        //Escreve mensagem
         btn[0].setOnAction(event -> {
-            response = "field0";
+            response = "0";
         });
         btn[1].setOnAction(event -> {
-            response = "field1";
+            response = "1";
         });
         btn[2].setOnAction(event -> {
-            response = "field2";
+            response = "2";
         });
         btn[3].setOnAction(event -> {
-            response = "field3";
+            response = "3";
         });
         btn[4].setOnAction(event -> {
-            response = "field4";
+            response = "4";
         });
         btn[5].setOnAction(event -> {
-            response = "field5";
+            response = "5";
         });
         btn[6].setOnAction(event -> {
-            response = "field6";
+            response = "6";
         });
         btn[7].setOnAction(event -> {
-            response = "field7";
+            response = "7";
         });
         btn[8].setOnAction(event -> {
-            response = "field8";
+            response = "8";
         });
+        
+        launch();
     }
 
     public Scene Game() {
@@ -64,22 +71,21 @@ public class Graphics {
         
         this.DisableAll();
 
-        
-        VBox column1 = new VBox(10);
-        column1.setAlignment(Pos.CENTER);
-        //column1.getChildren().addAll(btn[]);
+        HBox line1 = new HBox(10);
+        line1.setAlignment(Pos.CENTER);
+        line1.getChildren().addAll(btn[0], btn[1], btn[2]);
 
-        VBox column2 = new VBox(10);
-        column2.setAlignment(Pos.CENTER);
-        //column2.getChildren().addAll(field4, field5, field6);
+        HBox line2 = new HBox(10);
+        line2.setAlignment(Pos.CENTER);
+        line2.getChildren().addAll(btn[3], btn[4], btn[5]);
 
-        VBox column3 = new VBox(10);
-        column3.setAlignment(Pos.CENTER);
-        //column3.getChildren().addAll(field7, field8, field9);
-
-        HBox org = new HBox(10);
+        HBox line3 = new HBox(10);
+        line3.setAlignment(Pos.CENTER);
+        line3.getChildren().addAll(btn[6], btn[7], btn[8]);
+                
+        VBox org = new VBox(10);
         org.setAlignment(Pos.CENTER);
-        org.getChildren().addAll(column1, column2, column3);
+        org.getChildren().addAll(line1, line2, line3);
 
         player1Pane.getChildren().add(org);
 
@@ -102,6 +108,16 @@ public class Graphics {
                 btn[i].setDisable(false);
             }
         }
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        
+        primaryStage.setTitle("Jogo da Velha");
+        primaryStage.setScene(this.Game());
+        primaryStage.show();
+        
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
    

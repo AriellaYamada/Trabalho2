@@ -17,18 +17,28 @@ import javafx.stage.Stage;
  *
  * @author ariellayamada
  */
-public class Game{
+public class Game {
     
-    public int matrix;
+    public int matrix[];
     public int nrounds;
     public int draw;
-    
-    Graphics g = new Graphics();
-    
    
+    public Game () {
+        matrix = new int[9];
+    }
     
-    
-    
-    
-    
+    public boolean VerifyEnd() {
+        if(matrix[0] != 0 && matrix[0] == matrix[1] && matrix[1] == matrix[2]) {
+            return true;
+        } else if (matrix[3] != 0 && matrix[3] == matrix[4] && matrix[4] == matrix[5]) {
+            return true;
+        } else if (matrix[6] != 0 && matrix[6] == matrix[7] && matrix[7] == matrix[8]) {
+            return true;
+        } else if (matrix[0] != 0 && matrix[0] == matrix[4] && matrix[4] == matrix[8]) {
+            return true;
+        } else if (matrix[2] != 0 && matrix[2] == matrix[4] && matrix[4] == matrix[6]) {
+            return true;
+        }
+        return false;
+    }
 }

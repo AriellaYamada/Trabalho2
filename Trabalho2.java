@@ -5,6 +5,9 @@
  */
 package trabalho2;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -22,6 +25,9 @@ public class Trabalho2 extends Application{
     /**
      * @param args the command line arguments
      */
+    
+    public Player p;
+    
     public static void main(String[] args) {
         launch(args);
     }
@@ -31,21 +37,26 @@ public class Trabalho2 extends Application{
         Button novoJogo = new Button("Iniciar um jogo");
         Button conectar = new Button("Conectar à um jogador");
         
-        
-        
         novoJogo.setOnAction(event -> 
         {
-           
+            try {
+                p = new Player(true);
+            } catch (IOException ex) {
+                Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         }
         );
         
         conectar.setOnAction(event ->{
-
+            try {
+                p = new Player(false);
+            } catch (IOException ex) {
+                Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         });
-        
-        
+         
         HBox boxButtons = new HBox(8);
         boxButtons.setAlignment(Pos.CENTER);
         boxButtons.getChildren().addAll(novoJogo, conectar);
