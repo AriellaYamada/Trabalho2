@@ -29,7 +29,7 @@ public class Graphics{
    
     public String response;
 
-    private void BtnPress(int id){
+    private void BtnPress(int id, Comm c){
         DisableAll();
         this.response = Integer.valueOf(id).toString();
         try {
@@ -47,17 +47,17 @@ public class Graphics{
             btn[i].setId(Integer.valueOf(i).toString());
         }
 
-        btn[0].setOnAction(event -> BtnPress(0));
-        btn[1].setOnAction(event -> BtnPress(1));
-        btn[2].setOnAction(event -> BtnPress(2));
-        btn[3].setOnAction(event -> BtnPress(3));
-        btn[4].setOnAction(event -> BtnPress(4));
-        btn[5].setOnAction(event -> BtnPress(5));
-        btn[6].setOnAction(event -> BtnPress(6));
-        btn[7].setOnAction(event -> BtnPress(7));
-        btn[8].setOnAction(event -> BtnPress(8));
+        btn[0].setOnAction(event -> BtnPress(0, c));
+        btn[1].setOnAction(event -> BtnPress(1, c));
+        btn[2].setOnAction(event -> BtnPress(2, c));
+        btn[3].setOnAction(event -> BtnPress(3, c));
+        btn[4].setOnAction(event -> BtnPress(4, c));
+        btn[5].setOnAction(event -> BtnPress(5, c));
+        btn[6].setOnAction(event -> BtnPress(6, c));
+        btn[7].setOnAction(event -> BtnPress(7, c));
+        btn[8].setOnAction(event -> BtnPress(8, c));
 
-    });
+
 
         /*
         //Escreve mensagem
