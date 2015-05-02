@@ -30,9 +30,9 @@ public class Comm {
         signalIn = new BufferedReader(new InputStreamReader(client.getInputStream()));
     }  
     
-    public void CreateServer() throws IOException {
+    public void CreateServer(int port) throws IOException {
         
-        server = new ServerSocket(12345);
+        server = new ServerSocket(port);
         System.out.printf("Servidor criado");
         client = server.accept();
         
