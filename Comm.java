@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -33,7 +34,11 @@ public class Comm {
     public void CreateServer(int port) throws IOException {
         
         server = new ServerSocket(12345);
-        System.out.printf("Servidor criado");
+        System.out.println("Servidor criado");
+        InetAddress IP = InetAddress.getLocalHost();
+        System.out.println("IP: " + IP.toString());
+
+        System.out.println("IP2: " + server.getInetAddress().toString());
         client = server.accept();
         
     }
