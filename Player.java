@@ -45,7 +45,7 @@ public class Player {
     public Scene ConnectPane () {
         
         StackPane player2Pane = new StackPane();
-        Scene pane = new Scene(player2Pane, 500, 600);
+        Scene pane = new Scene(player2Pane, 450, 450);
         VBox org = new VBox(30);
         
         TextField ipEntry;
@@ -53,6 +53,9 @@ public class Player {
         
         ipEntry = new TextField();
         portEntry = new TextField();
+
+        ipEntry.setText("127.0.0.1");
+        portEntry.setText("12345");
         
         ipEntry.setOnAction(event -> {
            this.ip = ipEntry.getText();
