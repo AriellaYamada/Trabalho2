@@ -37,10 +37,12 @@ public class Trabalho2 extends Application{
         {
             try {
                 p = new Player(true);
+                primaryStage.setScene(p.h.init());
             } catch (IOException ex) {
                 Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
             }
-            primaryStage.setScene(p.h.Game());
+            if (p.flagConnection == 1)
+                primaryStage.setScene(p.h.Game());
             
         });
         
@@ -53,7 +55,9 @@ public class Trabalho2 extends Application{
             } catch (IOException ex) {
                 Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+            if (p.flagConnection == 1) {
+                primaryStage.setScene(p.h.Game());
+            }
         });
          
         HBox boxButtons = new HBox(8);
