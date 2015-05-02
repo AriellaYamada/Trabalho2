@@ -25,55 +25,25 @@ public class Player {
     public int points;
     public String ip;
     public int port;
+    public int flagConnection;
     Comm connection;
     Game g;
     Graphics h;
     
     public Player(boolean type) throws IOException{
         //this.type = type;
+        flagConnection = 0;
         connection = new Comm();
       
         //g = new Game();
         h = new Graphics(connection);
         
         if (type == true) {
-            connection.CreateServer(12345);
-            
+            connection.CreateServer(12345);  
         }
     } 
     
     public Scene ConnectPane () {
-        
-        StackPane player2Pane = new StackPane();
-        Scene pane = new Scene(player2Pane, 500, 600);
-        VBox org = new VBox(30);
-        
-        TextField ipEntry;
-        TextField portEntry;
-        
-        ipEntry = new TextField();
-        portEntry = new TextField();
-        
-        ipEntry.setOnAction(event -> {
-           this.ip = ipEntry.getText();
-           System.out.printf("%s\n", this.ip);
-        });
-        portEntry.setOnAction(event -> {
-            this.port = Integer.parseInt(portEntry.getText());
-            try {
-                connection.CreateClient(this.ip, 12345);
-                //System.out.printf("%d\n", this.port);
-            } catch (IOException ex) {
-                Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        
-        org.setAlignment(Pos.CENTER);
-        org.getChildren().addAll(ipEntry, portEntry);
-        
-        player2Pane.getChildren().add(org);
-        
-        return pane;
-        
+        return h.ConnectPane(this);
     }
 }

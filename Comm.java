@@ -32,7 +32,7 @@ public class Comm {
     
     public void CreateServer(int port) throws IOException {
         
-        server = new ServerSocket(port);
+        server = new ServerSocket(12345);
         System.out.printf("Servidor criado");
         client = server.accept();
         
