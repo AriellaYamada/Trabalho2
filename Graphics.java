@@ -1,9 +1,11 @@
 package trabalho2;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -26,16 +28,41 @@ public class Graphics{
     public Button[] btn = new Button[9];
    
     public String response;
-    
+
+    private void BtnPress(int id){
+        DisableAll();
+        this.response = Integer.valueOf(id).toString();
+        try {
+            c.SendSignal(response);
+        } catch (IOException ex) {
+            Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public Graphics(Comm c) {
-        
+
         //Cria os botões
         for (int i = 0; i < 9; i++) {
             btn[i] = new Button();
+            btn[i].setId(Integer.valueOf(i).toString());
         }
-        
+
+        btn[0].setOnAction(event -> BtnPress(0));
+        btn[1].setOnAction(event -> BtnPress(1));
+        btn[2].setOnAction(event -> BtnPress(2));
+        btn[3].setOnAction(event -> BtnPress(3));
+        btn[4].setOnAction(event -> BtnPress(4));
+        btn[5].setOnAction(event -> BtnPress(5));
+        btn[6].setOnAction(event -> BtnPress(6));
+        btn[7].setOnAction(event -> BtnPress(7));
+        btn[8].setOnAction(event -> BtnPress(8));
+
+    });
+
+        /*
         //Escreve mensagem
         btn[0].setOnAction(event -> {
+            DisableAll();
             response = "0";
             try {
                 c.SendSignal(response);
@@ -44,6 +71,7 @@ public class Graphics{
             }
         });
         btn[1].setOnAction(event -> {
+            DisableAll();
             response = "1";
             try {
                 c.SendSignal(response);
@@ -52,6 +80,7 @@ public class Graphics{
             }
         });
         btn[2].setOnAction(event -> {
+            DisableAll();
             response = "2";
             try {
                 c.SendSignal(response);
@@ -60,6 +89,7 @@ public class Graphics{
             }
         });
         btn[3].setOnAction(event -> {
+            DisableAll();
             response = "3";
             try {
                 c.SendSignal(response);
@@ -68,6 +98,7 @@ public class Graphics{
             }
         });
         btn[4].setOnAction(event -> {
+            DisableAll();
             response = "4";
             try {
                 c.SendSignal(response);
@@ -76,6 +107,7 @@ public class Graphics{
             }
         });
         btn[5].setOnAction(event -> {
+            DisableAll();
             response = "5";
             try {
                 c.SendSignal(response);
@@ -84,6 +116,7 @@ public class Graphics{
             }
         });
         btn[6].setOnAction(event -> {
+            DisableAll();
             response = "6";
             try {
                 c.SendSignal(response);
@@ -92,6 +125,7 @@ public class Graphics{
             }
         });
         btn[7].setOnAction(event -> {
+            DisableAll();
             response = "7";
             try {
                 c.SendSignal(response);
@@ -100,9 +134,10 @@ public class Graphics{
             }
         });
         btn[8].setOnAction(event -> {
+            DisableAll();
             response = "8";
-            
-        });
+
+        });*/
     }
 
     public Scene init() {
