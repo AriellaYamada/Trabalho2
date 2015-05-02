@@ -1,5 +1,8 @@
 package trabalho2;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,13 +21,13 @@ import javafx.stage.Stage;
  *
  * @author ariellayamada
  */
-public class Graphics extends Application{
+public class Graphics{
 
     public Button[] btn = new Button[9];
    
     public String response;
     
-    public Graphics() {
+    public Graphics(Comm c) {
         
         //Cria os botões
         for (int i = 0; i < 9; i++) {
@@ -34,40 +37,85 @@ public class Graphics extends Application{
         //Escreve mensagem
         btn[0].setOnAction(event -> {
             response = "0";
+            try {
+                c.SendSignal(response);
+            } catch (IOException ex) {
+                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         btn[1].setOnAction(event -> {
             response = "1";
+            try {
+                c.SendSignal(response);
+            } catch (IOException ex) {
+                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         btn[2].setOnAction(event -> {
             response = "2";
+            try {
+                c.SendSignal(response);
+            } catch (IOException ex) {
+                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         btn[3].setOnAction(event -> {
             response = "3";
+            try {
+                c.SendSignal(response);
+            } catch (IOException ex) {
+                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         btn[4].setOnAction(event -> {
             response = "4";
+            try {
+                c.SendSignal(response);
+            } catch (IOException ex) {
+                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         btn[5].setOnAction(event -> {
             response = "5";
+            try {
+                c.SendSignal(response);
+            } catch (IOException ex) {
+                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         btn[6].setOnAction(event -> {
             response = "6";
+            try {
+                c.SendSignal(response);
+            } catch (IOException ex) {
+                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         btn[7].setOnAction(event -> {
             response = "7";
+            try {
+                c.SendSignal(response);
+            } catch (IOException ex) {
+                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         btn[8].setOnAction(event -> {
             response = "8";
+            
         });
-        
-        launch();
     }
 
+    public Scene init() {
+        StackPane choose = new StackPane();
+        Scene pane = new Scene(choose, 500, 600);
+        
+        return pane;
+    }
     public Scene Game() {
 
         // MONTA A TELA DO JOGADOR/SERVIDOR
-        StackPane player1Pane = new StackPane();
-        Scene pane = new Scene(player1Pane, 500, 600);
+        StackPane playerPane = new StackPane();
+        Scene pane = new Scene(playerPane, 500, 600);
         
         this.DisableAll();
 
@@ -87,7 +135,7 @@ public class Graphics extends Application{
         org.setAlignment(Pos.CENTER);
         org.getChildren().addAll(line1, line2, line3);
 
-        player1Pane.getChildren().add(org);
+        playerPane.getChildren().add(org);
 
         return pane;
     }
@@ -108,18 +156,5 @@ public class Graphics extends Application{
                 btn[i].setDisable(false);
             }
         }
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        
-        primaryStage.setTitle("Jogo da Velha");
-        primaryStage.setScene(this.Game());
-        primaryStage.show();
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-   
-    
+    }    
 }

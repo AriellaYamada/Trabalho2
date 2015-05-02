@@ -41,6 +41,7 @@ public class Trabalho2 extends Application{
         {
             try {
                 p = new Player(true);
+                primaryStage.setScene(p.h.Game());
             } catch (IOException ex) {
                 Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
             }

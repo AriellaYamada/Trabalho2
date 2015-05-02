@@ -25,7 +25,7 @@ public class Player {
         connection = new Comm();
       
         //g = new Game();
-        //h = new Graphics();
+        h = new Graphics(connection);
         
         if (type == true) {
             connection.CreateServer();
@@ -34,13 +34,7 @@ public class Player {
             String ip;
             int port;
             
-            connection.CreateClient("ip", 12345);
-            
-        }
-        
-        
-    }
-
-    
-    
+            connection.CreateClient("ip", 12345); 
+        }  
+    } 
 }
