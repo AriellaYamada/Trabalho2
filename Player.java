@@ -16,11 +16,13 @@ public class Player {
     //public boolean type;
     public boolean mark;
     public int points;
+    public String ip;
+    public int port;
     Comm connection;
     Game g;
     Graphics h;
     
-    public Player(boolean type) throws IOException {
+    public Player(boolean type) throws IOException{
         //this.type = type;
         connection = new Comm();
       
@@ -28,13 +30,10 @@ public class Player {
         h = new Graphics(connection);
         
         if (type == true) {
-            connection.CreateServer();
+            connection.CreateServer(port);
             
-        } else {
-            String ip;
-            int port;
-            
-            connection.CreateClient("ip", 12345); 
+        } else {   
+            connection.CreateClient(ip, 12345); 
         }  
     } 
 }

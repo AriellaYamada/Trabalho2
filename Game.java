@@ -28,12 +28,27 @@ public class Game {
     }
     
     public boolean VerifyEnd() {
-        if(matrix[0] != 0 && matrix[0] == matrix[1] && matrix[1] == matrix[2]) {
+        if(matrix[0] != 0) {
+            //Verifica primeira linha
+            if (matrix[0] == matrix[1] && matrix[1] == matrix[2]){ 
+                return true;
+            //Verifica primeira coluna
+            } else if (matrix[0] == matrix[3] && matrix[3] == matrix[6]) {
+                return true;
+            }
+        //Verifica segunda coluna
+        } else if (matrix[1] != 0 && matrix[1] == matrix[4] && matrix[4] == matrix[7]) {
             return true;
+        //Verifica terceira coluna
+        } else if (matrix[2] != 0 && matrix[2] == matrix[5] && matrix[5] == matrix[8]) {
+            return true;
+        //Verifica segunda linha
         } else if (matrix[3] != 0 && matrix[3] == matrix[4] && matrix[4] == matrix[5]) {
             return true;
+        //Verifica terceira linha
         } else if (matrix[6] != 0 && matrix[6] == matrix[7] && matrix[7] == matrix[8]) {
             return true;
+        //Verifica diagonais
         } else if (matrix[0] != 0 && matrix[0] == matrix[4] && matrix[4] == matrix[8]) {
             return true;
         } else if (matrix[2] != 0 && matrix[2] == matrix[4] && matrix[4] == matrix[6]) {
