@@ -21,7 +21,7 @@ import javafx.scene.layout.VBox;
 public class Player {
     
     //public boolean type;
-    public boolean mark;
+    public int mark;
     public int points;
     public String ip;
     public int port;
@@ -45,5 +45,9 @@ public class Player {
     
     public Scene ConnectPane () {
         return h.ConnectPane(this);
+    }
+    
+    public Scene Init () {
+        return h.init(this);
     }
 }
