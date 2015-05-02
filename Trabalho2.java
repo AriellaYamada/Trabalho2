@@ -21,10 +21,6 @@ import javafx.stage.Stage;
  * @author ariellayamada
  */
 public class Trabalho2 extends Application{
-
-    /**
-     * @param args the command line arguments
-     */
     
     public Player p;
     
@@ -41,17 +37,19 @@ public class Trabalho2 extends Application{
         {
             try {
                 p = new Player(true);
-                primaryStage.setScene(p.h.Game());
             } catch (IOException ex) {
                 Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
             }
+            primaryStage.setScene(p.h.Game());
             
-        }
-        );
+        });
         
         conectar.setOnAction(event ->{
             try {
+                
                 p = new Player(false);
+                primaryStage.setScene(p.ConnectPane());
+                
             } catch (IOException ex) {
                 Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
             }
