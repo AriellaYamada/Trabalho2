@@ -59,7 +59,7 @@ public class Graphics{
         btn[8].setOnAction(event -> BtnPress(8, c));
     }
 
-    public Scene init() {
+    public Scene init(Player p) {
         
         StackPane choose = new StackPane();
         Scene pane = new Scene(choose, 300, 250);
@@ -69,6 +69,14 @@ public class Graphics{
         
         HBox t = new HBox(20);
         t.setAlignment(Pos.CENTER);
+        
+        x.setOnAction(event -> {
+            p.mark = 1;
+        });
+        
+        o.setOnAction(event -> {
+            p.mark = 2;
+        });
         
         t.getChildren().addAll(x, o);
         
