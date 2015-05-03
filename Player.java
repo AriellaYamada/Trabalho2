@@ -82,9 +82,10 @@ public class Player {
         //Inicia a partida
         connection.SetCommunication();
         Round r = new Round(this);
+        Thread round = new Thread(r);
         //Verifica se alguém ganhou
         while (g.VerifyEnd() == 0) {
-           r.run();
+           round.start();
         }
         //Se ganhou
         if (g.VerifyEnd() == 1) {
