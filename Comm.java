@@ -5,10 +5,7 @@
  */
 package trabalho2;
 
-import com.sun.corba.se.spi.activation.Server;
 import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -16,7 +13,6 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -63,7 +59,7 @@ public class Comm {
 
     public void CreateClient(String ip, int port) throws IOException {
 
-        System.out.println("Tentando conexão em: "+ip+" : "+port);
+        System.out.println("Tentando conexï¿½o em: "+ip+" : "+port);
         client = new Socket(ip, port);
     }
     
