@@ -122,12 +122,9 @@ public class Graphics{
         int k = 0;
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++) {
-                btn[k].setText(Integer.valueOf(k).toString());
                 btn[k].setPrefSize(150, 150);
                 btn[k].setMaxSize(1000, 1000);
-                //GridPane.setHalignment(btn[k], HPos.CENTER);
                 GridPane.setHgrow(btn[k], Priority.ALWAYS);
-                //GridPane.setValignment(btn[k], VPos.CENTER);
                 GridPane.setVgrow(btn[k], Priority.ALWAYS);
                 grid.add(btn[k], j, i);
                 k++;
