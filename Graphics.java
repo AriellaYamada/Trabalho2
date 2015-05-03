@@ -31,17 +31,26 @@ public class Graphics{
    
     public String response;
 
-    private void BtnPress(int id, Comm c){
+    public void StartGame () {
+        Stage secondaryStage = new Stage();
+        secondaryStage.setScene(Game());
+        secondaryStage.show();
+    }
+
+    private void BtnPress(Player p, Button bt, Comm c){
+
         DisableAll();
-        this.response = Integer.valueOf(id).toString();
+        this.response = bt.getId();
+        bt.setText(p.getMark());
         try {
             c.SendSignal(response);
         } catch (IOException ex) {
             Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
-    public Graphics(Comm c) {
+    public Graphics(Comm c, Player p) {
 
         //Cria os botões
         for (int i = 0; i < 9; i++) {
@@ -49,19 +58,28 @@ public class Graphics{
             btn[i].setId(Integer.valueOf(i).toString());
         }
 
-        btn[0].setOnAction(event -> BtnPress(0, c));
-        btn[1].setOnAction(event -> BtnPress(1, c));
-        btn[2].setOnAction(event -> BtnPress(2, c));
-        btn[3].setOnAction(event -> BtnPress(3, c));
-        btn[4].setOnAction(event -> BtnPress(4, c));
-        btn[5].setOnAction(event -> BtnPress(5, c));
-        btn[6].setOnAction(event -> BtnPress(6, c));
-        btn[7].setOnAction(event -> BtnPress(7, c));
-        btn[8].setOnAction(event -> BtnPress(8, c));
+        btn[0].setOnAction(event -> BtnPress(p, btn[0], c));
+        btn[1].setOnAction(event -> BtnPress(p, btn[1], c));
+        btn[2].setOnAction(event -> BtnPress(p, btn[2], c));
+        btn[3].setOnAction(event -> BtnPress(p, btn[3], c));
+        btn[4].setOnAction(event -> BtnPress(p, btn[4], c));
+        btn[5].setOnAction(event -> BtnPress(p, btn[5], c));
+        btn[6].setOnAction(event -> BtnPress(p, btn[6], c));
+        btn[7].setOnAction(event -> BtnPress(p, btn[7], c));
+        btn[8].setOnAction(event -> BtnPress(p, btn[8], c));
 
     }
 
+    private void ChooseMark (Player p, int mark) {
+       
+        p.mark = mark;
+        p.flagConnection = 1;
+        StartGame();
+      
+    }
+    
     public Scene init(Player p) {
+        
         
         StackPane choose = new StackPane();
         Scene pane = new Scene(choose, 300, 250);
@@ -72,15 +90,11 @@ public class Graphics{
         HBox t = new HBox(20);
         t.setAlignment(Pos.CENTER);
         
-        x.setOnAction(event -> {
-            p.mark = 1;
-            p.flagConnection = 1;
-        });
+        //1 = x
+        //2 = o
         
-        o.setOnAction(event -> {
-            p.mark = 2;
-            p.flagConnection = 1;
-        });
+        x.setOnAction(event -> ChooseMark(p, 1));
+        o.setOnAction(event -> ChooseMark(p, 2));
         
         t.getChildren().addAll(x, o);
         
@@ -105,12 +119,9 @@ public class Graphics{
         int k = 0;
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++) {
-                btn[k].setText(Integer.valueOf(k).toString());
                 btn[k].setPrefSize(150, 150);
                 btn[k].setMaxSize(1000, 1000);
-                //GridPane.setHalignment(btn[k], HPos.CENTER);
                 GridPane.setHgrow(btn[k], Priority.ALWAYS);
-                //GridPane.setValignment(btn[k], VPos.CENTER);
                 GridPane.setVgrow(btn[k], Priority.ALWAYS);
                 grid.add(btn[k], j, i);
                 k++;
@@ -147,26 +158,12 @@ public class Graphics{
                 p.connection.CreateClient(p.ip, 12345);
                 p.flagConnection = 1;
                 //System.out.printf("%d\n", this.port);
+                StartGame();
             } catch (IOException ex) {
                 Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        /*
-        ipEntry.setOnAction(event -> {
-           p.ip = ipEntry.getText();
-           System.out.printf("%s\n", p.ip);
-        });
-        portEntry.setOnAction(event -> {
-            p.port = Integer.parseInt(portEntry.getText());
-            try {
-                p.connection.CreateClient(p.ip, 12345);
-                p.flagConnection = 1;
-                //System.out.printf("%d\n", this.port);
-            } catch (IOException ex) {
-                Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        */
+        
         org.setAlignment(Pos.CENTER);
         org.getChildren().addAll(ipEntry, portEntry, btn);
         

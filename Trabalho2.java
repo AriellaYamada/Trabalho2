@@ -29,13 +29,14 @@ public class Trabalho2 extends Application{
     public static void main(String[] args) {
         launch(args);
     }
-    
+   /*
     private void BtnPressed (int btn, boolean type) throws IOException {
-        p = new Player(type);
+        p = new Player(type, primaryStage);
     }
-    
+    */
     @Override
     public void start(Stage primaryStage) {
+
         novoJogo = new Button("Iniciar um jogo");
         conectar = new Button("Conectar à um jogador");
         
@@ -43,7 +44,7 @@ public class Trabalho2 extends Application{
         {
             try {
                 //Cria jogador como jogador/servidor
-                p = new Player(true);
+                p = new Player(true, primaryStage);
                 primaryStage.setScene(p.Init());
             } catch (IOException ex) {
                 Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
@@ -52,19 +53,15 @@ public class Trabalho2 extends Application{
         
         conectar.setOnAction(event ->{
             try {
+
                 //Cria jogador como jogador/cliente
-                p = new Player(false);
+                p = new Player(false, primaryStage);
                 primaryStage.setScene(p.ConnectPane());
                 
             } catch (IOException ex) {
                 Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-       /* if (p.flagConnection == 1) {
-            primaryStage.setScene(p.Game());
-        }*/
-        
-        
          
         HBox boxButtons = new HBox(8);
         boxButtons.setAlignment(Pos.CENTER);
