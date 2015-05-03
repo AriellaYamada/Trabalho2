@@ -26,14 +26,14 @@ public class Player {
     public int points;
     public String ip;
     public int port;
-    public int flagConnection;
+    public boolean authorization;
+    //public int flagConnection;
     Comm connection;
     Graphics h;
     Game g;
     
     public Player(boolean type, Stage st) throws IOException{
         //this.type = type;
-        flagConnection = 0;
         connection = new Comm();
         g = new Game();
       
@@ -69,9 +69,8 @@ public class Player {
     }
     
     public void StartGame () {
-        /*while (g.VerifyEnd() == false) {
+        while (g.VerifyEnd() == false) {
             h.UpdateButtons(g.matrix);
-            while ()
-        }*/
+        }
     }
 }

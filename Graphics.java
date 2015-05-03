@@ -76,7 +76,6 @@ public class Graphics{
     private void ChooseMark (Player p, int mark) {
        
         p.mark = mark;
-        p.flagConnection = 1;
         StartGame();
       
     }
@@ -159,7 +158,6 @@ public class Graphics{
             p.port = Integer.parseInt(portEntry.getText());
             try {
                 p.connection.CreateClient(p.ip, 12345);
-                p.flagConnection = 1;
                 //System.out.printf("%d\n", this.port);
                 StartGame();
             } catch (IOException ex) {
