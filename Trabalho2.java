@@ -32,11 +32,12 @@ public class Trabalho2 extends Application{
     public void start(Stage primaryStage) {
         Button novoJogo = new Button("Iniciar um jogo");
         Button conectar = new Button("Conectar à um jogador");
-        
+
+
         novoJogo.setOnAction(event -> 
         {
-            try {
-                p = new Player(true);
+                try {
+                p = new Player(true, primaryStage);
                 primaryStage.setScene(p.Init());
             } catch (IOException ex) {
                 Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,7 +50,7 @@ public class Trabalho2 extends Application{
         conectar.setOnAction(event ->{
             try {
                 
-                p = new Player(false);
+                p = new Player(false, primaryStage);
                 primaryStage.setScene(p.ConnectPane());
                 
             } catch (IOException ex) {

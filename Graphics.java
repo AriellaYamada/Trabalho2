@@ -31,17 +31,20 @@ public class Graphics{
    
     public String response;
 
-    private void BtnPress(int id, Comm c){
+    private void BtnPress(Player p, Button bt, Comm c){
+
         DisableAll();
-        this.response = Integer.valueOf(id).toString();
+        this.response = bt.getId();
+        bt.setText(p.getMark());
         try {
             c.SendSignal(response);
         } catch (IOException ex) {
             Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
-    public Graphics(Comm c) {
+    public Graphics(Comm c, Player p) {
 
         //Cria os botões
         for (int i = 0; i < 9; i++) {
@@ -49,15 +52,15 @@ public class Graphics{
             btn[i].setId(Integer.valueOf(i).toString());
         }
 
-        btn[0].setOnAction(event -> BtnPress(0, c));
-        btn[1].setOnAction(event -> BtnPress(1, c));
-        btn[2].setOnAction(event -> BtnPress(2, c));
-        btn[3].setOnAction(event -> BtnPress(3, c));
-        btn[4].setOnAction(event -> BtnPress(4, c));
-        btn[5].setOnAction(event -> BtnPress(5, c));
-        btn[6].setOnAction(event -> BtnPress(6, c));
-        btn[7].setOnAction(event -> BtnPress(7, c));
-        btn[8].setOnAction(event -> BtnPress(8, c));
+        btn[0].setOnAction(event -> BtnPress(p, btn[0], c));
+        btn[1].setOnAction(event -> BtnPress(p, btn[1], c));
+        btn[2].setOnAction(event -> BtnPress(p, btn[2], c));
+        btn[3].setOnAction(event -> BtnPress(p, btn[3], c));
+        btn[4].setOnAction(event -> BtnPress(p, btn[4], c));
+        btn[5].setOnAction(event -> BtnPress(p, btn[5], c));
+        btn[6].setOnAction(event -> BtnPress(p, btn[6], c));
+        btn[7].setOnAction(event -> BtnPress(p, btn[7], c));
+        btn[8].setOnAction(event -> BtnPress(p, btn[8], c));
 
     }
 

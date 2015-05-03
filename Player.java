@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  *
@@ -30,16 +31,16 @@ public class Player {
     Game g;
     Graphics h;
     
-    public Player(boolean type) throws IOException{
+    public Player(boolean type, Stage st) throws IOException{
         //this.type = type;
         flagConnection = 0;
         connection = new Comm();
       
         //g = new Game();
-        h = new Graphics(connection);
+        h = new Graphics(connection, this);
         
         if (type == true) {
-            connection.CreateServer(12345);  
+            connection.CreateServer(12345, st);
         }
     } 
     
@@ -49,5 +50,16 @@ public class Player {
     
     public Scene Init () {
         return h.init(this);
+    }
+
+    public String getMark(){
+        String m;
+        switch (this.mark){
+            case 1:
+                m = "X";
+            default:
+                m = "O";
+        }
+        return m;
     }
 }
