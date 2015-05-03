@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabalho2;
 
 import com.sun.corba.se.spi.activation.Server;
@@ -15,6 +10,7 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -23,22 +19,15 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-/**
- *
- * @author ariellayamada
- */
-
-
-
 public class Comm {
     
     Socket client;
     ServerSocket server;
-    public PrintStream signalOut;
+    public PrintWriter signalOut;
     public BufferedReader signalIn;
 
-    public void Start () throws IOException {
-        signalOut = new PrintStream(client.getOutputStream());
+    public void SetCommunication () throws IOException {
+        signalOut = new PrintWriter(client.getOutputStream());
         signalIn = new BufferedReader(new InputStreamReader(client.getInputStream()));
     }
 
@@ -83,9 +72,7 @@ public class Comm {
     }
     
     public String ReceiveSignal() throws IOException {
-        String t = signalIn.readLine();
-        System.out.printf(t);
-        return t;
-        
+        BufferedReader t = signalIn;
+        return t.toString();
     }
 }

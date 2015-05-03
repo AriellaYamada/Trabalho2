@@ -32,27 +32,6 @@ public class Graphics{
     public String response;
     Stage secondaryStage;
     
-    public void StartGame (Player p) throws IOException {
-        
-        secondaryStage.setScene(Game());
-        secondaryStage.show();
-        
-        p.StartGame();
-    }
-
-    private void BtnPress(Player p, Button bt, Comm c){
-
-        DisableAll();
-        this.response = bt.getId();
-        bt.setText(p.getMark());
-        try {
-            c.SendSignal(response);
-        } catch (IOException ex) {
-            Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
     public Graphics(Comm c, Player p, Stage ps) {
 
         secondaryStage = ps;
@@ -74,6 +53,30 @@ public class Graphics{
         btn[8].setOnAction(event -> BtnPress(p, btn[8], c));
 
     }
+    
+    private void BtnPress(Player p, Button bt, Comm c){
+
+        DisableAll();
+        p.authorization = false;
+        this.response = bt.getId();
+        bt.setText(p.getMark());
+        try {
+            c.SendSignal(response);
+        } catch (IOException ex) {
+            Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    public void StartGame (Player p) throws IOException {
+        
+        secondaryStage.setScene(Game());
+        secondaryStage.show();
+        
+        p.StartGame();
+    }
+
+    
 
     private void ChooseMark (Player p, int mark) throws IOException {
        
@@ -199,7 +202,6 @@ public class Graphics{
         int i;
         for (i = 0; i < 9; i++) {
             if (round[i] == 0) {
-                //this.ActiveButton(i);
                 btn[i].setDisable(false);
             }
         }
