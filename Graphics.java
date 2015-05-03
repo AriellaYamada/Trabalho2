@@ -31,7 +31,7 @@ public class Graphics{
    
     public String response;
 
-    private void StartGame () {
+    public void StartGame () {
         Stage secondaryStage = new Stage();
         secondaryStage.setScene(Game());
         secondaryStage.show();
@@ -72,7 +72,7 @@ public class Graphics{
         p.mark = mark;
         p.flagConnection = 1;
         StartGame();
-       
+      
     }
     
     public Scene init(Player p) {
@@ -157,8 +157,8 @@ public class Graphics{
             try {
                 p.connection.CreateClient(p.ip, 12345);
                 p.flagConnection = 1;
-                StartGame();
                 //System.out.printf("%d\n", this.port);
+                StartGame();
             } catch (IOException ex) {
                 Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
             }

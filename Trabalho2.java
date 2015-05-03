@@ -60,11 +60,6 @@ public class Trabalho2 extends Application{
                 Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-       /* if (p.flagConnection == 1) {
-            primaryStage.setScene(p.Game());
-        }*/
-        
-        
          
         HBox boxButtons = new HBox(8);
         boxButtons.setAlignment(Pos.CENTER);

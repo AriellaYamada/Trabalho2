@@ -27,13 +27,14 @@ public class Player {
     public int port;
     public int flagConnection;
     Comm connection;
-    Game g;
     Graphics h;
+    Game g;
     
     public Player(boolean type) throws IOException{
         //this.type = type;
         flagConnection = 0;
         connection = new Comm();
+        g = new Game();
       
         //g = new Game();
         h = new Graphics(connection);
@@ -53,5 +54,12 @@ public class Player {
     
     public Scene Game () {
         return h.Game();
+    }
+    
+    public void StartGame () {
+        h.StartGame();
+        /*while (g.VerifyEnd() == false) {
+            
+        }*/
     }
 }
