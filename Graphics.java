@@ -74,10 +74,12 @@ public class Graphics{
         
         x.setOnAction(event -> {
             p.mark = 1;
+            p.flagConnection = 1;
         });
         
         o.setOnAction(event -> {
             p.mark = 2;
+            p.flagConnection = 1;
         });
         
         t.getChildren().addAll(x, o);

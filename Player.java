@@ -50,4 +50,8 @@ public class Player {
     public Scene Init () {
         return h.init(this);
     }
+    
+    public Scene Game () {
+        return h.Game();
+    }
 }

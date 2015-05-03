@@ -36,29 +36,29 @@ public class Trabalho2 extends Application{
         novoJogo.setOnAction(event -> 
         {
             try {
+                //Cria jogador como jogador/servidor
                 p = new Player(true);
                 primaryStage.setScene(p.Init());
             } catch (IOException ex) {
                 Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (p.mark != 0)
-                primaryStage.setScene(p.h.Game());
-            
         });
         
         conectar.setOnAction(event ->{
             try {
-                
+                //Cria jogador como jogador/cliente
                 p = new Player(false);
                 primaryStage.setScene(p.ConnectPane());
                 
             } catch (IOException ex) {
                 Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (p.flagConnection == 1) {
-                primaryStage.setScene(p.h.Game());
-            }
         });
+        if (p.flagConnection == 1) {
+            primaryStage.setScene(p.Game());
+        }
+        
+        
          
         HBox boxButtons = new HBox(8);
         boxButtons.setAlignment(Pos.CENTER);
