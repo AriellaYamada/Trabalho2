@@ -75,6 +75,7 @@ public class Graphics{
     private void ChooseMark (Player p, int mark) {
        
         p.mark = mark;
+        System.out.printf("%d", mark);
         secondaryStage.setScene(this.ConnectPane(p));
     }
     
@@ -157,7 +158,11 @@ public class Graphics{
             try {
                 p.connection.CreateClient(p.ip, 12345);
                 //System.out.printf("%d\n", this.port);
-                StartGame(p);
+                //StartGame(p);
+                
+                ReceiveMessage teste = new ReceiveMessage(p.connection.signalIn);
+                Thread t = new Thread(teste);
+                t.start();
             } catch (IOException ex) {
                 Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
             }
