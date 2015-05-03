@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author ariellayamada
  */
-public class Round implements Runnable{
+public class Round {
 
     Player p;
     
@@ -21,7 +21,6 @@ public class Round implements Runnable{
         this.p = p;
     }
     
-    @Override
     public void run() {
         if (this.p.authorization == true) {
             this.p.h.UpdateButtons(this.p.g.matrix);
