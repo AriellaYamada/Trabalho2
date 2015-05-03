@@ -31,6 +31,12 @@ public class Graphics{
    
     public String response;
 
+    private void StartGame () {
+        Stage secondaryStage = new Stage();
+        secondaryStage.setScene(Game());
+        secondaryStage.show();
+    }
+    
     private void BtnPress(int id, Comm c){
         DisableAll();
         this.response = Integer.valueOf(id).toString();
@@ -62,13 +68,13 @@ public class Graphics{
     }
 
     private void ChooseMark (Player p, int mark) {
-        Stage secondaryStage = new Stage();
-        
+       
         p.mark = mark;
         p.flagConnection = 1;
-        secondaryStage.setScene(Game());
-        secondaryStage.show();
+        StartGame();
+       
     }
+    
     public Scene init(Player p) {
         
         
@@ -151,6 +157,7 @@ public class Graphics{
             try {
                 p.connection.CreateClient(p.ip, 12345);
                 p.flagConnection = 1;
+                StartGame();
                 //System.out.printf("%d\n", this.port);
             } catch (IOException ex) {
                 Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
