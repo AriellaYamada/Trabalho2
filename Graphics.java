@@ -56,7 +56,7 @@ public class Graphics{
         this.response = bt.getId();
         bt.setText(p.getMark());
         try {
-            c.SendSignal(response);
+            c.SendSignal(this.response);
         } catch (IOException ex) {
             Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
         }

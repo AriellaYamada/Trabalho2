@@ -63,12 +63,17 @@ public class Player {
         
         serverResponse.start();
         //Verifica se alguém ganhou
-        while (game.VerifyEnd() == 0) {
+        this.frame.UpdateButtons(this.game.matrix);
+        /*while (true) {
            if (this.game.turn == this.mark) {
                this.frame.UpdateButtons(this.game.matrix);
+           } else {
+               this.frame.DisableAll();
            }
-        }
-        serverResponse.stop();
+           if (this.game.VerifyEnd() != 0)
+               break;
+        }*/
+        //serverResponse.stop();
         
         //Se ganhou
         if (game.VerifyEnd() == 1) {
@@ -80,6 +85,6 @@ public class Player {
             this.game.draw++;
             this.game.nrounds++;
         }
-        window.setScene(frame.PlayAgain(this));
+        //window.setScene(frame.PlayAgain(this));
     }
 }
