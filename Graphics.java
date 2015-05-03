@@ -61,7 +61,16 @@ public class Graphics{
 
     }
 
+    private void ChooseMark (Player p, int mark) {
+        Stage secondaryStage = new Stage();
+        
+        p.mark = mark;
+        p.flagConnection = 1;
+        secondaryStage.setScene(Game());
+        secondaryStage.show();
+    }
     public Scene init(Player p) {
+        
         
         StackPane choose = new StackPane();
         Scene pane = new Scene(choose, 300, 250);
@@ -72,15 +81,11 @@ public class Graphics{
         HBox t = new HBox(20);
         t.setAlignment(Pos.CENTER);
         
-        x.setOnAction(event -> {
-            p.mark = 1;
-            p.flagConnection = 1;
-        });
+        //1 = x
+        //2 = o
         
-        o.setOnAction(event -> {
-            p.mark = 2;
-            p.flagConnection = 1;
-        });
+        x.setOnAction(event -> ChooseMark(p, 1));
+        o.setOnAction(event -> ChooseMark(p, 2));
         
         t.getChildren().addAll(x, o);
         
@@ -151,22 +156,7 @@ public class Graphics{
                 Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        /*
-        ipEntry.setOnAction(event -> {
-           p.ip = ipEntry.getText();
-           System.out.printf("%s\n", p.ip);
-        });
-        portEntry.setOnAction(event -> {
-            p.port = Integer.parseInt(portEntry.getText());
-            try {
-                p.connection.CreateClient(p.ip, 12345);
-                p.flagConnection = 1;
-                //System.out.printf("%d\n", this.port);
-            } catch (IOException ex) {
-                Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        */
+        
         org.setAlignment(Pos.CENTER);
         org.getChildren().addAll(ipEntry, portEntry, btn);
         
