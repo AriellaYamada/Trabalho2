@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabalho2;
 
 import com.sun.corba.se.spi.activation.Server;
@@ -15,30 +10,26 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-
-/**
- *
- * @author ariellayamada
- */
-
-
+import java.util.Scanner;
 
 public class Comm {
     
     Socket client;
     ServerSocket server;
-    public PrintWriter signalOut;
-    public BufferedReader signalIn;
+    public PrintStream signalOut;
+    public Scanner signalIn;
 
-    public void Start () throws IOException {
-        signalOut = new PrintWriter(client.getOutputStream(), true);
-        signalIn = new BufferedReader(new InputStreamReader(client.getInputStream()));
+    public void SetCommunication () throws IOException {
+        signalOut = new PrintStream(client.getOutputStream());
+        signalIn = new Scanner(new InputStreamReader(client.getInputStream()));
     }
 
     public void CreateServer(int port, Stage st) throws IOException {
@@ -63,7 +54,7 @@ public class Comm {
 
     public void CreateClient(String ip, int port) throws IOException {
 
-        System.out.println("Tentando conexão em: "+ip+" : "+port);
+        System.out.println("Tentando conexï¿½o em: "+ip+" : "+port);
         client = new Socket(ip, port);
     }
     
@@ -78,9 +69,11 @@ public class Comm {
     
     public void SendSignal(String response) throws IOException {
        signalOut.println(response);
+       System.out.printf(response);
     }
     
     public String ReceiveSignal() throws IOException {
-        return signalIn.readLine();
+        Scanner t = signalIn;
+        return t.toString();
     }
 }

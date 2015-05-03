@@ -30,34 +30,18 @@ public class Graphics{
     public Button[] btn = new Button[9];
    
     public String response;
+    Stage secondaryStage;
+    
+    public Graphics(Comm c, Player p, Stage ps) {
 
-    public void StartGame () {
-        Stage secondaryStage = new Stage();
-        secondaryStage.setScene(Game());
-        secondaryStage.show();
-    }
-
-    private void BtnPress(Player p, Button bt, Comm c){
-
-        DisableAll();
-        this.response = bt.getId();
-        bt.setText(p.getMark());
-        try {
-            c.SendSignal(response);
-        } catch (IOException ex) {
-            Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    public Graphics(Comm c, Player p) {
-
+        secondaryStage = ps;
+        
         //Cria os botões
         for (int i = 0; i < 9; i++) {
             btn[i] = new Button();
             btn[i].setId(Integer.valueOf(i).toString());
         }
-
+        
         btn[0].setOnAction(event -> BtnPress(p, btn[0], c));
         btn[1].setOnAction(event -> BtnPress(p, btn[1], c));
         btn[2].setOnAction(event -> BtnPress(p, btn[2], c));
@@ -69,12 +53,33 @@ public class Graphics{
         btn[8].setOnAction(event -> BtnPress(p, btn[8], c));
 
     }
+    
+    private void BtnPress(Player p, Button bt, Comm c){
 
-    private void ChooseMark (Player p, int mark) {
+        DisableAll();
+        p.authorization = false;
+        this.response = bt.getId();
+        bt.setText(p.getMark());
+        try {
+            c.SendSignal(response);
+        } catch (IOException ex) {
+            Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    public void StartGame (Player p) throws IOException {
+        
+        secondaryStage.setScene(Game());
+        secondaryStage.show();
+        
+        p.StartGame();
+    }
+
+    private void ChooseMark (Player p, int mark) throws IOException {
        
         p.mark = mark;
-        p.flagConnection = 1;
-        StartGame();
+        StartGame(p);
       
     }
     
@@ -93,8 +98,20 @@ public class Graphics{
         //1 = x
         //2 = o
         
-        x.setOnAction(event -> ChooseMark(p, 1));
-        o.setOnAction(event -> ChooseMark(p, 2));
+        x.setOnAction(event -> {
+            try {
+                ChooseMark(p, 1);
+            } catch (IOException ex) {
+                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        o.setOnAction(event -> {
+            try {
+                ChooseMark(p, 2);
+            } catch (IOException ex) {
+                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
         
         t.getChildren().addAll(x, o);
         
@@ -156,9 +173,8 @@ public class Graphics{
             p.port = Integer.parseInt(portEntry.getText());
             try {
                 p.connection.CreateClient(p.ip, 12345);
-                p.flagConnection = 1;
                 //System.out.printf("%d\n", this.port);
-                StartGame();
+                StartGame(p);
             } catch (IOException ex) {
                 Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -175,7 +191,7 @@ public class Graphics{
     
     public void DisableAll () {
         for (int i = 0; i < 9; i++) {
-            btn[i].setDisable(false);
+            btn[i].setDisable(true);
         }
     }
     
@@ -184,7 +200,6 @@ public class Graphics{
         int i;
         for (i = 0; i < 9; i++) {
             if (round[i] == 0) {
-                //this.ActiveButton(i);
                 btn[i].setDisable(false);
             }
         }
