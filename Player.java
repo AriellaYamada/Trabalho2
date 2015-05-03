@@ -71,7 +71,7 @@ public class Player {
         } else {
             g.matrix[pos] = 1;
         }
-        
+
         if (pos != 0)
             return true;
         return false;

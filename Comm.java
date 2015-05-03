@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -33,11 +34,11 @@ public class Comm {
     
     Socket client;
     ServerSocket server;
-    public PrintWriter signalOut;
+    public PrintStream signalOut;
     public BufferedReader signalIn;
 
     public void Start () throws IOException {
-        signalOut = new PrintWriter(client.getOutputStream(), true);
+        signalOut = new PrintStream(client.getOutputStream());
         signalIn = new BufferedReader(new InputStreamReader(client.getInputStream()));
     }
 
@@ -63,7 +64,7 @@ public class Comm {
 
     public void CreateClient(String ip, int port) throws IOException {
 
-        System.out.println("Tentando conexão em: "+ip+" : "+port);
+        System.out.println("Tentando conexï¿½o em: "+ip+" : "+port);
         client = new Socket(ip, port);
     }
     
@@ -78,9 +79,13 @@ public class Comm {
     
     public void SendSignal(String response) throws IOException {
        signalOut.println(response);
+       System.out.printf(response);
     }
     
     public String ReceiveSignal() throws IOException {
-        return signalIn.readLine();
+        String t = signalIn.readLine();
+        System.out.printf(t);
+        return t;
+        
     }
 }
