@@ -64,7 +64,7 @@ public class Player {
         serverResponse.start();
         //Verifica se alguém ganhou
         this.frame.UpdateButtons(this.game.matrix);
-        while (game.VerifyEnd() == 0) {
+        /*while (game.VerifyEnd() == 0) {
            if (this.game.turn == this.mark) {
                this.frame.UpdateButtons(this.game.matrix);
            } else {
@@ -74,7 +74,7 @@ public class Player {
                break;
         }
         serverResponse.stop();
-        
+        */
         //Se ganhou
         if (game.VerifyEnd() == 1) {
             this.points++;
