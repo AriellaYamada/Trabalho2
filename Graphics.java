@@ -147,9 +147,11 @@ public class Graphics{
         //TextField portEntry;
 
         TextField ipEntry = new TextField();
-        ipEntry.setPromptText("IP 192.168.0.1");
+        //ipEntry.setPromptText("IP 192.168.0.1");
+        ipEntry.setText("172.26.227.78");
         TextField portEntry = new TextField();
-        portEntry.setPromptText("12345");
+        //portEntry.setPromptText("12345");
+        portEntry.setText("12345");
         Button btn = new Button("Conectar");
         btn.setDefaultButton(true);
         btn.setOnAction(event1 -> {
