@@ -65,16 +65,14 @@ public class Player {
         
         //Verifica se alguém ganhou
         
-        while (game.VerifyEnd() == 0) {
+        //while (game.VerifyEnd() == 0) {
            if (this.game.turn == this.mark) {
                this.frame.UpdateButtons(this.game.matrix);
            } else {
                this.frame.DisableAll();
                server.run();
            }
-           if (this.game.VerifyEnd() != 0)
-               break;
-        }
+           
         
         
         while (game.turn == this.mark) {
