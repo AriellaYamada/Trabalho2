@@ -54,10 +54,13 @@ public class Graphics{
 
         //DisableAll();
         this.response = bt.getId();
+        
         if(p.mark == 1) {
              bt.setText("x");
+             p.game.turn = 2;
         } else {
             bt.setText("o");
+            p.game.turn = 1;
         }
         c.SendSignal(this.response);
  
