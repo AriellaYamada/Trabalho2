@@ -68,7 +68,8 @@ public class Trabalho2 extends Application{
         StackPane root = new StackPane();
         root.getChildren().add(boxButtons);
         Scene scene = new Scene(root, 300, 250);
-        
+
+        primaryStage.setResizable(false);
         primaryStage.setTitle("Jogo da Velha");
         primaryStage.setScene(scene);
         primaryStage.show();
