@@ -18,17 +18,18 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Comm {
     
     Socket client;
     ServerSocket server;
-    public PrintWriter signalOut;
-    public BufferedReader signalIn;
+    public PrintStream signalOut;
+    public Scanner signalIn;
 
     public void SetCommunication () throws IOException {
-        signalOut = new PrintWriter(client.getOutputStream());
-        signalIn = new BufferedReader(new InputStreamReader(client.getInputStream()));
+        signalOut = new PrintStream(client.getOutputStream());
+        signalIn = new Scanner(new InputStreamReader(client.getInputStream()));
     }
 
     public void CreateServer(int port, Stage st) throws IOException {
@@ -72,7 +73,7 @@ public class Comm {
     }
     
     public String ReceiveSignal() throws IOException {
-        BufferedReader t = signalIn;
+        Scanner t = signalIn;
         return t.toString();
     }
 }

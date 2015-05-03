@@ -76,8 +76,6 @@ public class Graphics{
         p.StartGame();
     }
 
-    
-
     private void ChooseMark (Player p, int mark) throws IOException {
        
         p.mark = mark;

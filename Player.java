@@ -67,7 +67,7 @@ public class Player {
         return m;
     }
     
-    private void ReceiveMove () throws IOException {
+    public void ReceiveMove () throws IOException {
         int pos = Integer.parseInt(connection.ReceiveSignal());
         if (this.mark == 1) {
             g.matrix[pos] = 2;
@@ -77,24 +77,15 @@ public class Player {
         this.authorization = true;
     }
     
-    private void round () throws IOException {
-        if (this.authorization == true) {
-            h.UpdateButtons(g.matrix);
-            //ReceiveMove();
-        } else {
-           ReceiveMove();
-        }
-        
-    }
-    
     public void StartGame () throws IOException {
         
         //Inicia a partida
         connection.SetCommunication();
+        Round r = new Round(this);
         //Verifica se alguém ganhou
-        //while (g.VerifyEnd() == 0) {
-            round();
-        //}
+        while (g.VerifyEnd() == 0) {
+           r.run();
+        }
         //Se ganhou
         if (g.VerifyEnd() == 1) {
             this.points++;
