@@ -44,9 +44,9 @@ public class Comm {
     }
     
     public void CreateClient(String ip, int port) throws IOException {
-        
-        client = new Socket(ip, port); 
-        
+
+        System.out.println("Tentando conexão em: "+ip+" : "+port);
+        client = new Socket(ip, port);
     }
     
     public void CloseConnectionServer () throws IOException {
