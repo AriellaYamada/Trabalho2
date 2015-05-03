@@ -176,7 +176,7 @@ public class Graphics{
     
     public void DisableAll () {
         for (int i = 0; i < 9; i++) {
-            btn[i].setDisable(false);
+            btn[i].setDisable(true);
         }
     }
     
