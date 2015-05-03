@@ -64,13 +64,28 @@ public class Player {
         return m;
     }
     
-    public Scene Game () {
-        return h.Game();
+    private boolean ReceiveMove () throws IOException {
+        int pos = Integer.parseInt(connection.ReceiveSignal());
+        if (this.mark == 1) {
+            g.matrix[pos] = 2;
+        } else {
+            g.matrix[pos] = 1;
+        }
+        
+        if (pos != 0)
+            return true;
+        return false;
+        
     }
     
-    public void StartGame () {
+    private void round () throws IOException {
+        h.UpdateButtons(g.matrix);
+        ReceiveMove();
+    }
+    
+    public void StartGame () throws IOException {
         while (g.VerifyEnd() == false) {
-            h.UpdateButtons(g.matrix);
+            round();
         }
     }
 }

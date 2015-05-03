@@ -32,10 +32,12 @@ public class Graphics{
     public String response;
     Stage secondaryStage;
     
-    public void StartGame () {
+    public void StartGame (Player p) throws IOException {
         
         secondaryStage.setScene(Game());
         secondaryStage.show();
+        
+        p.StartGame();
     }
 
     private void BtnPress(Player p, Button bt, Comm c){
@@ -73,10 +75,10 @@ public class Graphics{
 
     }
 
-    private void ChooseMark (Player p, int mark) {
+    private void ChooseMark (Player p, int mark) throws IOException {
        
         p.mark = mark;
-        StartGame();
+        StartGame(p);
       
     }
     
@@ -95,8 +97,20 @@ public class Graphics{
         //1 = x
         //2 = o
         
-        x.setOnAction(event -> ChooseMark(p, 1));
-        o.setOnAction(event -> ChooseMark(p, 2));
+        x.setOnAction(event -> {
+            try {
+                ChooseMark(p, 1);
+            } catch (IOException ex) {
+                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        o.setOnAction(event -> {
+            try {
+                ChooseMark(p, 2);
+            } catch (IOException ex) {
+                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
         
         t.getChildren().addAll(x, o);
         
@@ -159,7 +173,7 @@ public class Graphics{
             try {
                 p.connection.CreateClient(p.ip, 12345);
                 //System.out.printf("%d\n", this.port);
-                StartGame();
+                StartGame(p);
             } catch (IOException ex) {
                 Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
             }
