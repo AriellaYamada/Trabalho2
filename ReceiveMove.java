@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author ariellayamada
  */
-public class ReceiveMove implements Runnable{
+public class ReceiveMove {
 
     public InputStream server;
     Game g;
@@ -22,17 +22,13 @@ public class ReceiveMove implements Runnable{
         this.g = g;
     }
     
-    @Override
     public void run() {
         
         Scanner move = new Scanner(this.server);
         String teste;
-        while (move.hasNextLine()) {
-            teste = move.nextLine();
-            g.ReceiveMove(Integer.parseInt(teste));
-            System.out.println(teste);
-        }
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        teste = move.nextLine();
+        g.ReceiveMove(Integer.parseInt(teste));
+        g.PrintMatrix();
+        System.out.println(teste);
     }
 }

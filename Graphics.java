@@ -189,12 +189,14 @@ public class Graphics{
     }
     
     public void UpdateButtons (int round[]) {
-        
-        int i;
-        for (i = 0; i < 9; i++) {
-            if (round[i] == 0) {
+       
+        for (int i = 0; i < 9; i++) {
+            if (round[i] == 0) 
                 btn[i].setDisable(false);
-            }
+            else if (round[i] == 1)
+                    btn[i].setText("x");
+            else
+                    btn[i].setText("o");
         }
     }  
     

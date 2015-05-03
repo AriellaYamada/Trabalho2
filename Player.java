@@ -59,22 +59,27 @@ public class Player {
         //Inicia a partida
         game = new Game(this.mark, first);
         ReceiveMove server = new ReceiveMove(this.connection.signalIn, this.game);
-        Thread serverResponse = new Thread(server);
+        //Thread serverResponse = new Thread(server);
         
-        serverResponse.start();
+        //serverResponse.start();
+        
         //Verifica se alguém ganhou
-        this.frame.UpdateButtons(this.game.matrix);
-        /*while (game.VerifyEnd() == 0) {
+        
+        while (game.VerifyEnd() == 0) {
            if (this.game.turn == this.mark) {
                this.frame.UpdateButtons(this.game.matrix);
            } else {
                this.frame.DisableAll();
+               server.run();
            }
            if (this.game.VerifyEnd() != 0)
                break;
         }
-        serverResponse.stop();
-        */
+        
+        
+        while (game.turn == this.mark) {
+            this.frame.UpdateButtons(this.game.matrix);
+        }
         //Se ganhou
         if (game.VerifyEnd() == 1) {
             this.points++;

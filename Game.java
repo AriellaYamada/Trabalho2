@@ -33,6 +33,12 @@ public class Game {
         }
     }
     
+    public void PrintMatrix () {
+        for (int i = 0; i < 9; i++)
+            System.out.println(this.matrix[i] + " ");
+        
+    }
+    
     public int VerifyEnd() {
         if(matrix[0] != 0) {
             //Verifica primeira linha
