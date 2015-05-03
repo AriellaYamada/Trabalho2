@@ -40,8 +40,7 @@ public class Player {
         //g = new Game();
         h = new Graphics(connection, this, st);
         
-        if (type == true) {
-            this.connection.CreateServer(12345, st);
+        if (mark == 1) {
             this.authorization = true;
         } else {
             this.authorization = false;
@@ -80,7 +79,6 @@ public class Player {
     public void StartGame () throws IOException {
         
         //Inicia a partida
-        connection.SetCommunication();
         Round r = new Round(this);
         //Thread round = new Thread(r);
         //Verifica se alguém ganhou
