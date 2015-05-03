@@ -6,13 +6,7 @@
 package trabalho2;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -28,17 +22,17 @@ public class Player {
     public int port;
     public boolean authorization;
     //public int flagConnection;
-    Comm connection;
-    Graphics h;
-    Game g;
+    public Comm connection;
+    public Graphics frame;
+    public Game game;
+    public Stage window;
     
     public Player(boolean type, Stage st) throws IOException{
         //this.type = type;
         connection = new Comm();
-        g = new Game();
-      
-        //g = new Game();
-        h = new Graphics(connection, this, st);
+        window = st;
+
+        frame = new Graphics(connection, this, st);
         
         if (mark == 1) {
             this.authorization = true;
@@ -48,11 +42,11 @@ public class Player {
     } 
     
     public Scene ConnectPane () {
-        return h.ConnectPane(this);
+        return frame.ConnectPane(this);
     }
     
     public Scene Init () {
-        return h.init(this);
+        return frame.init(this);
     }
 
     public String getMark() {
@@ -66,33 +60,32 @@ public class Player {
         return m;
     }
     
-    public void ReceiveMove () throws IOException {
-        int pos = Integer.parseInt(connection.ReceiveSignal());
-        if (this.mark == 1) {
-            g.matrix[pos] = 2;
-        } else {
-            g.matrix[pos] = 1;
-        }
-        this.authorization = true;
-    }
-    
     public void StartGame () throws IOException {
         
         //Inicia a partida
-        Round r = new Round(this);
-        //Thread round = new Thread(r);
+        game = new Game(this.mark);
+        ReceiveMove server = new ReceiveMove(this.connection.signalIn, this.game);
+        Thread serverResponse = new Thread(server);
+        
+        serverResponse.start();
         //Verifica se alguém ganhou
-        while (g.VerifyEnd() == 0) {
-           r.run();
+        while (game.VerifyEnd() == 0) {
+           if (this.game.turn == this.mark) {
+               this.frame.UpdateButtons(this.game.matrix);
+           }
         }
+        serverResponse.stop();
+        
         //Se ganhou
-        if (g.VerifyEnd() == 1) {
+        if (game.VerifyEnd() == 1) {
             this.points++;
-            this.g.nrounds++;
+            this.game.nrounds++;
         //Se empatou
-        } else if (g.VerifyEnd() == 3) {
-            this.g.draw++;
-            this.g.nrounds++;
+            
+        } else if (game.VerifyEnd() == 3) {
+            this.game.draw++;
+            this.game.nrounds++;
         }
+        window.setScene(frame.PlayAgain(this));
     }
 }

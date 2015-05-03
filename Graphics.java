@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -198,5 +199,40 @@ public class Graphics{
                 btn[i].setDisable(false);
             }
         }
-    }    
+    }  
+    
+    public Scene PlayAgain (Player p) {
+        StackPane st = new StackPane();
+        Scene sn = new Scene(st, 300, 250);
+        
+        Label q = new Label("Do you want to play again?");
+        Button yes = new Button("Yes");
+        Button no = new Button("No");
+        
+        yes.setOnAction(event-> {
+            try {
+                p.StartGame();
+            } catch (IOException ex) {
+                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        no.setOnAction(event -> {
+            try {
+                p.connection.CloseConnectionClient();
+            } catch (IOException ex) {
+                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        HBox h = new HBox(30);
+        h.setAlignment(Pos.CENTER);
+        h.getChildren().addAll(yes, no);
+        VBox v = new VBox();
+        v.setAlignment(Pos.CENTER);
+        v.getChildren().addAll(q, h);
+        
+        st.getChildren().add(v);
+        
+        return sn;
+    }
 }

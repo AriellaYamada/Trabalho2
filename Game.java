@@ -17,9 +17,20 @@ public class Game {
     public int matrix[];
     public int nrounds;
     public int draw;
+    public int turn;
    
-    public Game () {
+    public Game (int mark) {
         matrix = new int[9];
+        turn = mark;
+    }
+    
+    public void ReceiveMove (int move) {
+        matrix[move] = turn;
+        if (turn == 1) {
+            turn = 2;
+        } else {
+            turn = 1;
+        }
     }
     
     public int VerifyEnd() {
