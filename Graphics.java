@@ -64,12 +64,18 @@ public class Graphics{
 
     }
     
-    public void StartGame (Player p) throws IOException {
+    public void StartGame (Player p) {
         
         secondaryStage.setScene(Game());
         secondaryStage.show();
         
-        p.StartGame();
+        try {
+            p.StartGame();
+        } catch (IOException ex) {
+            Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void ChooseMark (Player p, int mark) {
@@ -212,6 +218,8 @@ public class Graphics{
             try {
                 p.StartGame();
             } catch (IOException ex) {
+                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException ex) {
                 Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
             }
         });

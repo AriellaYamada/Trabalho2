@@ -54,7 +54,7 @@ public class Player {
         return m;
     }
     
-    public void StartGame () throws IOException {
+    public void StartGame () throws IOException, InterruptedException {
         
         //Inicia a partida
         game = new Game(this.mark, first);
@@ -65,11 +65,13 @@ public class Player {
         
         //Verifica se alguém ganhou
         
-       //while (game.VerifyEnd() == 0) {
+       while (game.VerifyEnd() == 0) {
         //frame.UpdateButtons(this.game.matrix);
-        if(game.VerifyEnd() == 0) {
+        //if(game.VerifyEnd() == 0) {
            if (this.game.turn == this.mark) {
                this.frame.UpdateButtons(this.game.matrix);
+               this.wait(15);
+   
            } else {
                this.frame.DisableAll();
                server.run();

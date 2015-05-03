@@ -28,7 +28,6 @@ public class ReceiveMove {
         String teste;
         teste = move.nextLine();
         g.ReceiveMove(Integer.parseInt(teste));
-        g.PrintMatrix();
         System.out.println(teste);
     }
 }
