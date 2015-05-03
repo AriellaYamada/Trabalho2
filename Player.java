@@ -27,18 +27,12 @@ public class Player {
     public Game game;
     public Stage window;
     
-    public Player(boolean type, Stage st) throws IOException{
+    public Player(Stage st) throws IOException{
         //this.type = type;
         connection = new Comm();
         window = st;
 
         frame = new Graphics(connection, this, st);
-        
-        if (mark == 1) {
-            this.authorization = true;
-        } else {
-            this.authorization = false;
-        }
     } 
     
     public Scene ConnectPane () {

@@ -23,49 +23,26 @@ import javafx.stage.Stage;
 public class Trabalho2 extends Application{
     
     public Player p;
-    Button novoJogo;
-    Button conectar;
+    Button pA;
+    Button pB;
     
     public static void main(String[] args) {
         launch(args);
     }
-   /*
-    private void BtnPressed (int btn, boolean type) throws IOException {
-        p = new Player(type, primaryStage);
-    }
-    */
+    
     @Override
     public void start(Stage primaryStage) {
 
-        novoJogo = new Button("Iniciar um jogo");
-        conectar = new Button("Conectar à um jogador");
+        pA = new Button("Player A");
+        pB = new Button("Player B");
         
-        novoJogo.setOnAction(event -> 
-        {
-            try {
-                //Cria jogador como jogador/servidor
-                p = new Player(true, primaryStage);
-                primaryStage.setScene(p.Init());
-            } catch (IOException ex) {
-                Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
+        pA.setOnAction(event -> this.btnPressed(primaryStage));
         
-        conectar.setOnAction(event ->{
-            try {
-
-                //Cria jogador como jogador/cliente
-                p = new Player(false, primaryStage);
-                primaryStage.setScene(p.ConnectPane());
-                
-            } catch (IOException ex) {
-                Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
+        pB.setOnAction(event -> this.btnPressed(primaryStage));
          
         HBox boxButtons = new HBox(8);
         boxButtons.setAlignment(Pos.CENTER);
-        boxButtons.getChildren().addAll(novoJogo, conectar);
+        boxButtons.getChildren().addAll(pA, pB);
         
         StackPane root = new StackPane();
         root.getChildren().add(boxButtons);
@@ -74,6 +51,15 @@ public class Trabalho2 extends Application{
         primaryStage.setTitle("Jogo da Velha");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+    
+    public void btnPressed (Stage primaryStage) {
+        try {
+            p = new Player(primaryStage);
+        } catch (IOException ex) {
+            Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        primaryStage.setScene(p.Init());
     }
     
 }

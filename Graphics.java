@@ -72,11 +72,10 @@ public class Graphics{
         p.StartGame();
     }
 
-    private void ChooseMark (Player p, int mark) throws IOException {
+    private void ChooseMark (Player p, int mark) {
        
         p.mark = mark;
-        StartGame(p);
-      
+        secondaryStage.setScene(this.ConnectPane(p));
     }
     
     public Scene init(Player p) {
@@ -94,20 +93,8 @@ public class Graphics{
         //1 = x
         //2 = o
         
-        x.setOnAction(event -> {
-            try {
-                ChooseMark(p, 1);
-            } catch (IOException ex) {
-                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        o.setOnAction(event -> {
-            try {
-                ChooseMark(p, 2);
-            } catch (IOException ex) {
-                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
+        x.setOnAction(event -> ChooseMark(p, 1));
+        o.setOnAction(event -> ChooseMark(p, 2));
         
         t.getChildren().addAll(x, o);
         
