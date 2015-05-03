@@ -30,9 +30,10 @@ public class Graphics{
     public Button[] btn = new Button[9];
    
     public String response;
-
+    Stage secondaryStage;
+    
     public void StartGame () {
-        Stage secondaryStage = new Stage();
+        
         secondaryStage.setScene(Game());
         secondaryStage.show();
     }
@@ -50,14 +51,16 @@ public class Graphics{
 
     }
 
-    public Graphics(Comm c, Player p) {
+    public Graphics(Comm c, Player p, Stage ps) {
 
+        secondaryStage = ps;
+        
         //Cria os botões
         for (int i = 0; i < 9; i++) {
             btn[i] = new Button();
             btn[i].setId(Integer.valueOf(i).toString());
         }
-
+        
         btn[0].setOnAction(event -> BtnPress(p, btn[0], c));
         btn[1].setOnAction(event -> BtnPress(p, btn[1], c));
         btn[2].setOnAction(event -> BtnPress(p, btn[2], c));

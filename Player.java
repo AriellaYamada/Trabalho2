@@ -38,7 +38,7 @@ public class Player {
         g = new Game();
       
         //g = new Game();
-        h = new Graphics(connection, this);
+        h = new Graphics(connection, this, st);
         
         if (type == true) {
             connection.CreateServer(12345, st);
@@ -69,9 +69,9 @@ public class Player {
     }
     
     public void StartGame () {
-        h.StartGame();
         /*while (g.VerifyEnd() == false) {
-            
+            h.UpdateButtons(g.matrix);
+            while ()
         }*/
     }
 }
