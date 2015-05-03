@@ -23,15 +23,21 @@ import javafx.stage.Stage;
 public class Trabalho2 extends Application{
     
     public Player p;
+    Button novoJogo;
+    Button conectar;
     
     public static void main(String[] args) {
         launch(args);
     }
     
+    private void BtnPressed (int btn, boolean type) throws IOException {
+        p = new Player(type);
+    }
+    
     @Override
     public void start(Stage primaryStage) {
-        Button novoJogo = new Button("Iniciar um jogo");
-        Button conectar = new Button("Conectar à um jogador");
+        novoJogo = new Button("Iniciar um jogo");
+        conectar = new Button("Conectar à um jogador");
         
         novoJogo.setOnAction(event -> 
         {
@@ -54,9 +60,9 @@ public class Trabalho2 extends Application{
                 Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        if (p.flagConnection == 1) {
+       /* if (p.flagConnection == 1) {
             primaryStage.setScene(p.Game());
-        }
+        }*/
         
         
          
