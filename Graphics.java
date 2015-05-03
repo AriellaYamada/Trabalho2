@@ -160,8 +160,11 @@ public class Graphics{
                 //StartGame(p);
                 
                 ReceiveMessage teste = new ReceiveMessage(p.connection.signalIn);
-                Thread t = new Thread(teste);
-                t.start();
+                
+                teste.run();
+                
+                StartGame(p);
+                
             } catch (IOException ex) {
                 Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
             }
