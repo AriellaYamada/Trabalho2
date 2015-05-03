@@ -19,9 +19,17 @@ public class Game {
     public int draw;
     public int turn;
    
-    public Game (int mark) {
+    public Game (int mark, boolean first) {
         matrix = new int[9];
-        turn = mark;
+        if (first == true) {
+            turn = mark;
+        } else {
+            if (mark == 1) {
+                turn = 2;
+            } else {
+                turn = 1;
+            }
+        }
     }
     
     public void ReceiveMove (int move) {

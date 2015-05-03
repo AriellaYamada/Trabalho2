@@ -53,7 +53,6 @@ public class Graphics{
     private void BtnPress(Player p, Button bt, Comm c){
 
         DisableAll();
-        p.authorization = false;
         this.response = bt.getId();
         bt.setText(p.getMark());
         try {

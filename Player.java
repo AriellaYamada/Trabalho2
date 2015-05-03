@@ -20,7 +20,7 @@ public class Player {
     public int points;
     public String ip;
     public int port;
-    public boolean authorization;
+    public boolean first;
     //public int flagConnection;
     public Comm connection;
     public Graphics frame;
@@ -57,7 +57,7 @@ public class Player {
     public void StartGame () throws IOException {
         
         //Inicia a partida
-        game = new Game(this.mark);
+        game = new Game(this.mark, first);
         ReceiveMove server = new ReceiveMove(this.connection.signalIn, this.game);
         Thread serverResponse = new Thread(server);
         

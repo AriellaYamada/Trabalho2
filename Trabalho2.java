@@ -36,9 +36,9 @@ public class Trabalho2 extends Application{
         pA = new Button("Player A");
         pB = new Button("Player B");
         
-        pA.setOnAction(event -> this.btnPressed(primaryStage));
+        pA.setOnAction(event -> this.btnPressed(primaryStage, true));
         
-        pB.setOnAction(event -> this.btnPressed(primaryStage));
+        pB.setOnAction(event -> this.btnPressed(primaryStage, false));
          
         HBox boxButtons = new HBox(8);
         boxButtons.setAlignment(Pos.CENTER);
@@ -53,9 +53,10 @@ public class Trabalho2 extends Application{
         primaryStage.show();
     }
     
-    public void btnPressed (Stage primaryStage) {
+    public void btnPressed (Stage primaryStage, boolean type) {
         try {
             p = new Player(primaryStage);
+            p.first = type;
         } catch (IOException ex) {
             Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
         }
