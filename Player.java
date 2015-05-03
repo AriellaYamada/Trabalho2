@@ -26,22 +26,25 @@ public class Player {
     public int points;
     public String ip;
     public int port;
-    public int flagConnection;
+    public boolean authorization;
+    //public int flagConnection;
     Comm connection;
     Graphics h;
     Game g;
     
     public Player(boolean type, Stage st) throws IOException{
         //this.type = type;
-        flagConnection = 0;
         connection = new Comm();
         g = new Game();
       
         //g = new Game();
-        h = new Graphics(connection, this);
+        h = new Graphics(connection, this, st);
         
         if (type == true) {
-            connection.CreateServer(12345, st);
+            this.connection.CreateServer(12345, st);
+            this.authorization = true;
+        } else {
+            this.authorization = false;
         }
     } 
     
@@ -64,14 +67,34 @@ public class Player {
         return m;
     }
     
-    public Scene Game () {
-        return h.Game();
+    public void ReceiveMove () throws IOException {
+        int pos = Integer.parseInt(connection.ReceiveSignal());
+        if (this.mark == 1) {
+            g.matrix[pos] = 2;
+        } else {
+            g.matrix[pos] = 1;
+        }
+        this.authorization = true;
     }
     
-    public void StartGame () {
-        h.StartGame();
-        /*while (g.VerifyEnd() == false) {
-            
-        }*/
+    public void StartGame () throws IOException {
+        
+        //Inicia a partida
+        connection.SetCommunication();
+        Round r = new Round(this);
+        //Thread round = new Thread(r);
+        //Verifica se alguém ganhou
+        while (g.VerifyEnd() == 0) {
+           r.run();
+        }
+        //Se ganhou
+        if (g.VerifyEnd() == 1) {
+            this.points++;
+            this.g.nrounds++;
+        //Se empatou
+        } else if (g.VerifyEnd() == 3) {
+            this.g.draw++;
+            this.g.nrounds++;
+        }
     }
 }
