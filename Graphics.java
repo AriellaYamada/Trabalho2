@@ -129,12 +129,27 @@ public class Graphics{
         Scene pane = new Scene(player2Pane, 500, 600);
         VBox org = new VBox(30);
         
-        TextField ipEntry;
-        TextField portEntry;
-        
-        ipEntry = new TextField();
-        portEntry = new TextField();
-        
+        //TextField ipEntry;
+        //TextField portEntry;
+
+        TextField ipEntry = new TextField();
+        ipEntry.setPromptText("IP 192.168.0.1");
+        TextField portEntry = new TextField();
+        portEntry.setPromptText("12345");
+        Button btn = new Button("Conectar");
+        btn.setDefaultButton(true);
+        btn.setOnAction(event1 -> {
+            p.ip = ipEntry.getText();
+            p.port = Integer.parseInt(portEntry.getText());
+            try {
+                p.connection.CreateClient(p.ip, 12345);
+                p.flagConnection = 1;
+                //System.out.printf("%d\n", this.port);
+            } catch (IOException ex) {
+                Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        /*
         ipEntry.setOnAction(event -> {
            p.ip = ipEntry.getText();
            System.out.printf("%s\n", p.ip);
@@ -149,9 +164,9 @@ public class Graphics{
                 Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        
+        */
         org.setAlignment(Pos.CENTER);
-        org.getChildren().addAll(ipEntry, portEntry);
+        org.getChildren().addAll(ipEntry, portEntry, btn);
         
         player2Pane.getChildren().add(org);
         
