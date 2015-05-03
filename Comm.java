@@ -15,7 +15,7 @@ public class Comm {
 
         System.out.println("Tentando conex�o em: "+ip+" : "+port);
         client = new Socket(ip, port);
-        signalOut = new PrintWriter(client.getOutputStream());
+        signalOut = new PrintWriter(client.getOutputStream(), true);
         signalIn = client.getInputStream();
     }
     

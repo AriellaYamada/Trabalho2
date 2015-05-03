@@ -54,12 +54,13 @@ public class Graphics{
 
         DisableAll();
         this.response = bt.getId();
-        bt.setText(p.getMark());
-        try {
-            c.SendSignal(this.response);
-        } catch (IOException ex) {
-            Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+        if(p.mark == 1) {
+             bt.setText("x");
+        } else {
+            bt.setText("o");
         }
+        c.SendSignal(this.response);
+ 
 
     }
     
