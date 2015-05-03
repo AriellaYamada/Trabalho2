@@ -28,13 +28,14 @@ public class Player {
     public int port;
     public int flagConnection;
     Comm connection;
-    Game g;
     Graphics h;
+    Game g;
     
     public Player(boolean type, Stage st) throws IOException{
         //this.type = type;
         flagConnection = 0;
         connection = new Comm();
+        g = new Game();
       
         //g = new Game();
         h = new Graphics(connection, this);
@@ -52,14 +53,25 @@ public class Player {
         return h.init(this);
     }
 
-    public String getMark(){
+    public String getMark() {
         String m;
-        switch (this.mark){
+        switch (this.mark) {
             case 1:
                 m = "X";
             default:
                 m = "O";
         }
         return m;
+    }
+    
+    public Scene Game () {
+        return h.Game();
+    }
+    
+    public void StartGame () {
+        h.StartGame();
+        /*while (g.VerifyEnd() == false) {
+            
+        }*/
     }
 }
