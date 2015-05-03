@@ -52,7 +52,7 @@ public class Graphics{
     
     private void BtnPress(Player p, Button bt, Comm c){
 
-        DisableAll();
+        //DisableAll();
         this.response = bt.getId();
         if(p.mark == 1) {
              bt.setText("x");
