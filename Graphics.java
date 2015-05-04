@@ -62,6 +62,9 @@ public class Graphics{
     
     public void StartGame (Player p) {
         
+        secondaryStage.setScene(Game(p));
+        secondaryStage.show();
+        
         try {
             p.StartGame();
         } catch (IOException ex) {
@@ -104,7 +107,6 @@ public class Graphics{
     }
     public Scene Game(Player p) {
 
-        // MONTA A TELA DO JOGADOR/SERVIDOR
         StackPane playerPane = new StackPane();
 
         Scene pane = new Scene(playerPane, 450, 450);
@@ -160,8 +162,8 @@ public class Graphics{
                 
                 ReceiveMessage accept = new ReceiveMessage(p.connection.signalIn);
                 p.order = Integer.parseInt(accept.run());
-                String answer = accept.run();
-                if ("ready".equals(answer))
+                //String answer = accept.run();
+                //if ("ready".equals(answer))
                     StartGame(p);
                 
             } catch (IOException ex) {

@@ -27,11 +27,7 @@ public class Game {
     public boolean ReceiveMove(int move) {
         if (matrix[move] != 0) {
             matrix[move] = turn;
-            if (turn == 1) {
-                turn = 2;
-            } else {
-                turn = 1;
-            }
+            turn = 3 - turn;
             return true;
         }
         return false;

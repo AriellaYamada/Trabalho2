@@ -27,6 +27,8 @@ public class Player {
     public Game game;
     public Stage window;
 
+    public ReceiveMove server;
+    
     public Player(Stage st) throws IOException {
         //this.type = type;
         connection = new Comm();
@@ -58,22 +60,29 @@ public class Player {
 
         //Inicia a partida
         game = new Game(this.mark, order);
-        ReceiveMove server = new ReceiveMove(this.connection.signalIn, this.game);
+        server = new ReceiveMove(this.connection.signalIn, this.game);
+        MakeAMove localPlayer = new MakeAMove(this);
+        WaitForAMove serverPlayer = new WaitForAMove(this);
+        Thread move = new Thread(localPlayer);
+        Thread wait = new Thread(serverPlayer);
         //Thread serverResponse = new Thread(server);
 
         //serverResponse.start();
         //Verifica se alguém ganhou
+        
         while (game.turn != 42) {
             //frame.UpdateButtons(this);
            System.out.println(game.turn);
             switch (game.turn){
                 case 1:
-                    window.setScene(frame.Game(this));
+                    move.start();
+                    move.wait();
                     //frame.UpdateButtons(this);
                     break;
                 case 2:
-                    window.setScene(frame.WaitTurn(this));
-                    server.run();
+                    
+                    wait.start();
+                    wait.wait();
                     break;
             }
             if (game.VerifyEnd() != 0) {
