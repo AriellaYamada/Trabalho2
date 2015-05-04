@@ -69,6 +69,7 @@ public class Player {
             switch (game.turn){
                 case 1:
                     window.setScene(frame.Game());
+                    wait(15);
                     frame.UpdateButtons(this);
                     break;
                 case 2:
