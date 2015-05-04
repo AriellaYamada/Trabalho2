@@ -78,7 +78,10 @@ public class Player {
                 this.frame.DisableAll();
                 server.run();
             }
-
+            
+            if (game.VerifyEnd() != 0) {
+                game.turn = 3;
+            }
         }
 
         //Se ganhou
