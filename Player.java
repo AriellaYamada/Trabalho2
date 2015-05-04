@@ -70,25 +70,37 @@ public class Player {
         //serverResponse.start();
         //Verifica se alguém ganhou
         
-        while (game.turn != 42) {
+       /* while (game.turn != 42) {
             //frame.UpdateButtons(this);
            System.out.println(game.turn);
             switch (game.turn){
                 case 1:
+                    wait.destroy();
                     move.start();
-                    move.wait();
+                    //move.wait();
                     //frame.UpdateButtons(this);
                     break;
                 case 2:
-                    
+                    move.destroy();
                     wait.start();
-                    wait.wait();
+                    //wait.wait();
                     break;
             }
             if (game.VerifyEnd() != 0) {
                 game.turn = 42;
             }
             
+        }*/
+        while (game.turn != 3) {
+            if (game.turn == this.mark) {
+                this.frame.UpdateButtons(this);
+                wait();
+                //move.start();
+            } else {
+                this.frame.DisableAll();
+                server.run();
+            } 
+                
         }
 
         //Se ganhou

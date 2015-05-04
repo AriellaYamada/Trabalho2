@@ -18,7 +18,9 @@ public class WaitForAMove implements Runnable{
     @Override
     public void run() {
         
-        this.p.server.run();
+        this.p.frame.DisableAll();
+        //Thread test = new Thread(this.p.server);
+        //test.start();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

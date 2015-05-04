@@ -25,8 +25,10 @@ public class ReceiveMove {
     public void run() {
         
         Scanner move = new Scanner(this.server);
-        String teste;
-        teste = move.nextLine();
+        String teste = null;
+        while (!move.hasNextLine())
+            teste = move.nextLine();
+        
         g.ReceiveMove(Integer.parseInt(teste));
         System.out.println(teste);
     }
