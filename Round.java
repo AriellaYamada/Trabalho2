@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Trabalho2;
+package trabalho2;
 
 /**
  *
@@ -18,6 +18,6 @@ public class Round {
         p.frame.DisableAll();
         p.connection.SendSignal(response);
         p.server.run();
-        p.frame.UpdateButtons(this);
+        p.frame.UpdateButtons(this.p);
     }
 }

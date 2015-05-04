@@ -29,8 +29,7 @@ public class ReceiveMove {
         while (!move.hasNextLine());    
         teste = move.nextLine();
         
-        g.ReceiveMove(Integer.parseInt(teste));
-        //g.PrintMatrix();
-        System.out.println("Recebeu " + teste);
+        if(g.ReceiveMove(Integer.parseInt(teste)) == true)
+            System.out.println("Recebeu " + teste);
     }
 }

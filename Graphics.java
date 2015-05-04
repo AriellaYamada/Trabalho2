@@ -38,24 +38,27 @@ public class Graphics{
             btn[i].setId(Integer.valueOf(i).toString());
         }
         
-        btn[0].setOnAction(event -> BtnPress(p, btn[0], c));
-        btn[1].setOnAction(event -> BtnPress(p, btn[1], c));
-        btn[2].setOnAction(event -> BtnPress(p, btn[2], c));
-        btn[3].setOnAction(event -> BtnPress(p, btn[3], c));
-        btn[4].setOnAction(event -> BtnPress(p, btn[4], c));
-        btn[5].setOnAction(event -> BtnPress(p, btn[5], c));
-        btn[6].setOnAction(event -> BtnPress(p, btn[6], c));
-        btn[7].setOnAction(event -> BtnPress(p, btn[7], c));
-        btn[8].setOnAction(event -> BtnPress(p, btn[8], c));
+        btn[0].setOnAction(event -> BtnPress(p, btn[0]));
+        btn[1].setOnAction(event -> BtnPress(p, btn[1]));
+        btn[2].setOnAction(event -> BtnPress(p, btn[2]));
+        btn[3].setOnAction(event -> BtnPress(p, btn[3]));
+        btn[4].setOnAction(event -> BtnPress(p, btn[4]));
+        btn[5].setOnAction(event -> BtnPress(p, btn[5]));
+        btn[6].setOnAction(event -> BtnPress(p, btn[6]));
+        btn[7].setOnAction(event -> BtnPress(p, btn[7]));
+        btn[8].setOnAction(event -> BtnPress(p, btn[8]));
 
     }
     
-    private void BtnPress(Player p, Button bt, Comm c){
+    private void BtnPress(Player p, Button bt){
 
         this.response = bt.getId();
-        bt.setText(p.getMark());
-        Round r = new Round();
-        r.run(p);
+        if (p.mark == 1)
+            bt.setText("X");
+        else
+            bt.setText("O");
+        Round r = new Round(p);
+        r.run(this.response);
         //p.flag = false;
         
     }
@@ -171,8 +174,7 @@ public class Graphics{
                 //if ("ready".equals(answer))
                 
                 StartGame(p);
-                
-            
+
         });
         
         org.setAlignment(Pos.CENTER);
@@ -195,21 +197,13 @@ public class Graphics{
         for (int i = 0; i < 9; i++) {
             if (p.game.matrix[i] == 0)
                 btn[i].setDisable(false);
-            else
-                btn[i].setText(p.getMark());
+            else if (p.game.matrix[i] == 1)
+                btn[i].setText("X");
+            else if (p.game.matrix[i] == 2)
+                btn[i].setText("O");
         }
     }  
     
-    public Scene WaitTurn (Player p) {
-        StackPane pn = new StackPane();
-        Scene waitScene = new Scene(pn, 300, 250);
-        Label wait  = new Label("Wait for your turn");
-        
-        pn.getChildren().add(wait);
-        
-        return waitScene;
-        
-    }
     public Scene PlayAgain (Player p) {
         StackPane st = new StackPane();
         Scene sn = new Scene(st, 300, 250);

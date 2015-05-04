@@ -34,7 +34,6 @@ public class Player {
         //this.type = type;
         connection = new Comm();
         window = st;
-        flag = true;
         frame = new Graphics(connection, this, st);
     }
 
