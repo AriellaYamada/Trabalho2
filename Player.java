@@ -20,7 +20,7 @@ public class Player {
     public int points;
     public String ip;
     public int port;
-    public boolean first;
+    public int order;
     //public int flagConnection;
     public Comm connection;
     public Graphics frame;
@@ -57,7 +57,7 @@ public class Player {
     public void StartGame () throws IOException, InterruptedException {
         
         //Inicia a partida
-        game = new Game(this.mark, first);
+        game = new Game(this.mark, order);
         ReceiveMove server = new ReceiveMove(this.connection.signalIn, this.game);
         //Thread serverResponse = new Thread(server);
         
@@ -68,9 +68,10 @@ public class Player {
        while (game.VerifyEnd() == 0) {
         //frame.UpdateButtons(this.game.matrix);
         //if(game.VerifyEnd() == 0) {
+           System.out.println(this.game.turn);
            if (this.game.turn == this.mark) {
                this.frame.UpdateButtons(this.game.matrix);
-               this.wait(15);
+               //this.wait(15);
    
            } else {
                this.frame.DisableAll();

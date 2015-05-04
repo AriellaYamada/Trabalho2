@@ -19,19 +19,14 @@ public class ReceiveMessage {
         this.server = s;
     }
 
-    public void run() {
+    public String run() {
         
         Scanner move = new Scanner(this.server);
-        String teste;
-        //while (move.hasNextLine()) {
-            teste = move.nextLine();
-            //g.ReceiveMove(Integer.parseInt(teste));
-            System.out.println(teste);
-            
-           
-        //}
-        
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String msg;
+            msg = move.nextLine();
+            System.out.println(msg);
+            return msg;
+       
     }
     
 }

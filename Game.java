@@ -11,9 +11,9 @@ public class Game {
     public int draw;
     public int turn;
 
-    public Game(int mark, boolean first) {
+    public Game(int mark, int order) {
         matrix = new int[9];
-        if (first == true) {
+        if (order == 0) {
             turn = mark;
         } else {
             if (mark == 1) {
@@ -41,7 +41,6 @@ public class Game {
         for (int i = 0; i < 9; i++) {
             System.out.println(this.matrix[i] + " ");
         }
-
     }
 
     public int VerifyEnd() {

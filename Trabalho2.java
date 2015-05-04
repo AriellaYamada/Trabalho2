@@ -23,8 +23,7 @@ import javafx.stage.Stage;
 public class Trabalho2 extends Application{
     
     public Player p;
-    Button pA;
-    Button pB;
+    Button btn;
     
     public static void main(String[] args) {
         launch(args);
@@ -33,16 +32,14 @@ public class Trabalho2 extends Application{
     @Override
     public void start(Stage primaryStage) {
 
-        pA = new Button("Player A");
-        pB = new Button("Player B");
+        btn = new Button("Jogar");
         
-        pA.setOnAction(event -> this.btnPressed(primaryStage, true));
-        
-        pB.setOnAction(event -> this.btnPressed(primaryStage, false));
+        btn.setOnAction(event -> this.btnPressed(primaryStage));
+       
          
         HBox boxButtons = new HBox(8);
         boxButtons.setAlignment(Pos.CENTER);
-        boxButtons.getChildren().addAll(pA, pB);
+        boxButtons.getChildren().add(btn);
         
         StackPane root = new StackPane();
         root.getChildren().add(boxButtons);
@@ -53,10 +50,9 @@ public class Trabalho2 extends Application{
         primaryStage.show();
     }
     
-    public void btnPressed (Stage primaryStage, boolean type) {
+    public void btnPressed (Stage primaryStage) {
         try {
             p = new Player(primaryStage);
-            p.first = type;
         } catch (IOException ex) {
             Logger.getLogger(Trabalho2.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -63,7 +63,6 @@ public class Graphics{
             p.game.turn = 1;
         }
         c.SendSignal(this.response);
- 
 
     }
     
@@ -168,14 +167,13 @@ public class Graphics{
             p.port = Integer.parseInt(portEntry.getText());
             try {
                 p.connection.CreateClient(p.ip, 12345);
-                //System.out.printf("%d\n", this.port);
-                //StartGame(p);
                 
-                ReceiveMessage teste = new ReceiveMessage(p.connection.signalIn);
+                ReceiveMessage accept = new ReceiveMessage(p.connection.signalIn);
                 
-                teste.run();
-                
-                StartGame(p);
+                String answer = accept.run();
+                if ("ready".equals(answer))
+                    p.order = Integer.parseInt(accept.run());
+                    StartGame(p);
                 
             } catch (IOException ex) {
                 Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
