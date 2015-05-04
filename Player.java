@@ -62,35 +62,7 @@ public class Player {
         //Inicia a partida
         game = new Game(this.mark, order);
         server = new ReceiveMove(this.connection.signalIn, this.game);
-        frame.UpdateButtons(this);
-
-        while (game.turn != 3) {
-            //System.out.println("Vez do jogador " + game.turn);
-            if (game.turn != this.mark){
-                //this.frame.DisableAll();
-                this.flag = true;
-                server.run();
-                this.frame.UpdateButtons(this);
-            } else {
-                System.out.println("Minha vez");
-                WaitForAMove wfam = new WaitForAMove(this);
-                Thread tr = new Thread(wfam);
-                tr.start();
-                tr.join();
-            }
-        }
-        /*
-        //Se ganhou
-        if (game.VerifyEnd() == 1) {
-            this.points++;
-            this.game.nrounds++;
-            //Se empatou
-
-        } else if (game.VerifyEnd() == 3) {
-            this.game.draw++;
-            this.game.nrounds++;
-        }
-        //window.setScene(frame.PlayAgain(this));
-                */
+        
+        
     }
 }

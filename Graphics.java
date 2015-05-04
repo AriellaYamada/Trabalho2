@@ -52,13 +52,12 @@ public class Graphics{
     
     private void BtnPress(Player p, Button bt, Comm c){
 
-        DisableAll();
         this.response = bt.getId();
-
         bt.setText(p.getMark());
-        p.game.turn = 3 - p.game.turn;
-        p.flag = false;
-        c.SendSignal(this.response);
+        Round r = new Round();
+        r.run(p);
+        //p.flag = false;
+        
     }
     
     public void StartGame (Player p) {
@@ -68,6 +67,7 @@ public class Graphics{
         
         try {
             p.StartGame();
+            
         } catch (IOException ex) {
             Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
@@ -169,6 +169,7 @@ public class Graphics{
                 p.order = Integer.parseInt(accept.run());
                 //String answer = accept.run();
                 //if ("ready".equals(answer))
+                
                 StartGame(p);
                 
             
