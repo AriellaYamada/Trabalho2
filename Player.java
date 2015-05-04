@@ -56,6 +56,8 @@ public class Player {
 
     public void StartGame() throws IOException, InterruptedException {
 
+
+
         //Inicia a partida
         game = new Game(this.mark, order);
         ReceiveMove server = new ReceiveMove(this.connection.signalIn, this.game);
@@ -63,25 +65,22 @@ public class Player {
 
         //serverResponse.start();
         //Verifica se alguém ganhou
-        while (game.turn != 3) {
+        while (game.turn != 42) {
             //frame.UpdateButtons(this);
-            if (game.VerifyEnd() != 0) {
-                game.turn = 3;
+
+            switch (game.turn){
+                case 1:
+                    this.frame.UpdateButtons(this);
+                    break;
+                case 2:
+                    this.frame.DisableAll();
+                    server.run();
+                    break;
             }
-
-            System.out.println(this.game.turn);
-            if (this.game.turn == this.mark) {
-                this.frame.UpdateButtons(this);
-                //this.wait(15);
-
-            } else {
-                this.frame.DisableAll();
-                server.run();
+            if (game.VerifyEnd() != 0) {
+                game.turn = 42;
             }
             
-            if (game.VerifyEnd() != 0) {
-                game.turn = 3;
-            }
         }
 
         //Se ganhou
