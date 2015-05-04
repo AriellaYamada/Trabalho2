@@ -62,9 +62,6 @@ public class Graphics{
     
     public void StartGame (Player p) {
         
-        secondaryStage.setScene(Game());
-        secondaryStage.show();
-        
         try {
             p.StartGame();
         } catch (IOException ex) {
@@ -196,6 +193,16 @@ public class Graphics{
         }
     }  
     
+    public Scene WaitTurn (Player p) {
+        StackPane pn = new StackPane();
+        Scene waitScene = new Scene(pn, 300, 250);
+        Label wait  = new Label("Wait for your turn");
+        
+        pn.getChildren().add(wait);
+        
+        return waitScene;
+        
+    }
     public Scene PlayAgain (Player p) {
         StackPane st = new StackPane();
         Scene sn = new Scene(st, 300, 250);

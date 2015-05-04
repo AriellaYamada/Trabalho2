@@ -56,8 +56,6 @@ public class Player {
 
     public void StartGame() throws IOException, InterruptedException {
 
-
-
         //Inicia a partida
         game = new Game(this.mark, order);
         ReceiveMove server = new ReceiveMove(this.connection.signalIn, this.game);
@@ -67,14 +65,14 @@ public class Player {
         //Verifica se alguém ganhou
         while (game.turn != 42) {
             //frame.UpdateButtons(this);
-            this.frame.UpdateButtons(this);
+           
             switch (game.turn){
-                
                 case 1:
-                    wait(15);
+                    window.setScene(frame.Game());
+                    frame.UpdateButtons(this);
                     break;
                 case 2:
-                    this.frame.DisableAll();
+                    window.setScene(frame.WaitTurn(this));
                     server.run();
                     break;
             }
