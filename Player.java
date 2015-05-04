@@ -64,21 +64,20 @@ public class Player {
         //serverResponse.start();
         //Verifica se alguém ganhou
         while (game.turn != 3) {
-            //frame.UpdateButtons(this.game.matrix);
-            if (game.VerifyEnd() != 0) {
-                game.turn = 3;
-            }
-
+            
             System.out.println(this.game.turn);
             if (this.game.turn == this.mark) {
                 this.frame.UpdateButtons(this.game.matrix);
-                //this.wait(15);
+                wait(15);
 
             } else {
                 this.frame.DisableAll();
                 server.run();
             }
-
+            
+            if (game.VerifyEnd() != 0) {
+                game.turn = 3;
+            }
         }
 
         //Se ganhou
