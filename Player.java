@@ -64,14 +64,14 @@ public class Player {
         //serverResponse.start();
         //Verifica se alguém ganhou
         while (game.turn != 3) {
-            //frame.UpdateButtons(this.game.matrix);
+            //frame.UpdateButtons(this);
             if (game.VerifyEnd() != 0) {
                 game.turn = 3;
             }
 
             System.out.println(this.game.turn);
             if (this.game.turn == this.mark) {
-                this.frame.UpdateButtons(this.game.matrix);
+                this.frame.UpdateButtons(this);
                 //this.wait(15);
 
             } else {

@@ -54,15 +54,9 @@ public class Graphics{
 
         //DisableAll();
         this.response = bt.getId();
-        
-        if(p.mark == 1) {
-             bt.setText("x");
-             p.game.turn = 2;
-        } else {
-            bt.setText("o");
-            p.game.turn = 1;
-        }
-        c.SendSignal(this.response);
+
+        bt.setText(p.getMark());
+        p.game.turn = 3 - p.game.turn;
 
     }
     
@@ -83,7 +77,7 @@ public class Graphics{
     private void ChooseMark (Player p, int mark) {
        
         p.mark = mark;
-        System.out.printf("%d", mark);
+        System.out.printf("Escolheu : %d", mark);
         secondaryStage.setScene(this.ConnectPane(p));
     }
     
@@ -150,9 +144,7 @@ public class Graphics{
         StackPane player2Pane = new StackPane();
         Scene pane = new Scene(player2Pane, 500, 600);
         VBox org = new VBox(30);
-        
-        //TextField ipEntry;
-        //TextField portEntry;
+
 
         TextField ipEntry = new TextField();
         //ipEntry.setPromptText("IP 192.168.0.1");
@@ -194,15 +186,13 @@ public class Graphics{
         }
     }
     
-    public void UpdateButtons (int round[]) {
+    public void UpdateButtons (Player p) {
        
         for (int i = 0; i < 9; i++) {
-            if (round[i] == 0) 
+            if (p.game.matrix[i] == 0)
                 btn[i].setDisable(false);
-            else if (round[i] == 1)
-                    btn[i].setText("x");
             else
-                    btn[i].setText("o");
+                btn[i].setText(p.getMark());
         }
     }  
     
