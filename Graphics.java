@@ -58,6 +58,7 @@ public class Graphics{
             bt.setText("X");
         else
             bt.setText("O");
+        bt.setDisable(true);
         Round r = new Round(p);
         r.run(this.response);
         UpdateButtons(p);
@@ -70,15 +71,20 @@ public class Graphics{
         secondaryStage.setScene(Game(p));
         secondaryStage.show();
         
+        if (p.order == 0 )
+           this.DisableAll();
+        
         try {
             p.StartGame();
+            if (p.order == 0)
+                p.server.run(p);
+            this.UpdateButtons(p);
             
         } catch (IOException ex) {
             Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
             Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 
     private void ChooseMark (Player p, int mark) {
@@ -117,8 +123,6 @@ public class Graphics{
         StackPane playerPane = new StackPane();
 
         Scene pane = new Scene(playerPane, 450, 450);
-        
-        //DisableAll();
         
         GridPane grid = new GridPane();
         grid.setHgap(10);
