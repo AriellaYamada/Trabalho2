@@ -24,6 +24,7 @@ public class Comm {
     }
     
     public void SendSignal(String response) {
+        
        signalOut.println(response);
        System.out.println(response);
     }

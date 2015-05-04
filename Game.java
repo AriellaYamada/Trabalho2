@@ -28,6 +28,7 @@ public class Game {
         if (matrix[move] != 0) {
             matrix[move] = turn;
             turn = 3 - turn;
+            System.out.println("Mudou para a vez de " + turn);
             return true;
         }
         return false;

@@ -26,13 +26,11 @@ public class ReceiveMove {
         System.out.println("Esperando move");
         Scanner move = new Scanner(this.server);
         String teste = null;
-        while (!move.hasNextLine()){
-            continue;
-        }    
+        while (!move.hasNextLine());    
         teste = move.nextLine();
         
         g.ReceiveMove(Integer.parseInt(teste));
-        g.PrintMatrix();
-        System.out.println(teste);
+        //g.PrintMatrix();
+        System.out.println("Recebeu " + teste);
     }
 }

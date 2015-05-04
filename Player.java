@@ -21,6 +21,7 @@ public class Player {
     public String ip;
     public int port;
     public int order;
+    public boolean flag;
     //public int flagConnection;
     public Comm connection;
     public Graphics frame;
@@ -33,7 +34,7 @@ public class Player {
         //this.type = type;
         connection = new Comm();
         window = st;
-
+        flag = true;
         frame = new Graphics(connection, this, st);
     }
 
@@ -62,41 +63,20 @@ public class Player {
         game = new Game(this.mark, order);
         server = new ReceiveMove(this.connection.signalIn, this.game);
         frame.UpdateButtons(this);
-        //Thread serverResponse = new Thread(server);
 
-        //serverResponse.start();
-        //Verifica se alguém ganhou
-        
-       /* while (game.turn != 42) {
-            
-           System.out.println(game.turn);
-            switch (game.turn){
-                case 1:
-                    wait.destroy();
-                    move.start();
-                    //move.wait();
-                    //frame.UpdateButtons(this);
-                    break;
-                case 2:
-                    move.destroy();
-                    wait.start();
-                    //wait.wait();
-                    break;
-            }
-            if (game.VerifyEnd() != 0) {
-                game.turn = 42;
-            }
-            
-        }*/
-        //while (game.turn != 3) {
+        while (game.turn != 3) {
+            //System.out.println("Vez do jogador " + game.turn);
             if (game.turn != this.mark){
-                this.frame.DisableAll();
+                //this.frame.DisableAll();
+                this.flag = true;
                 server.run();
                 this.frame.UpdateButtons(this);
-            } 
-                
-        //}
-
+            } else {
+                while (this.flag)
+                    System.out.println("Minha vez");
+            }
+        }
+        /*
         //Se ganhou
         if (game.VerifyEnd() == 1) {
             this.points++;
@@ -108,5 +88,6 @@ public class Player {
             this.game.nrounds++;
         }
         //window.setScene(frame.PlayAgain(this));
+                */
     }
 }

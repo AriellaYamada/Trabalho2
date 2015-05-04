@@ -57,6 +57,7 @@ public class Graphics{
 
         bt.setText(p.getMark());
         p.game.turn = 3 - p.game.turn;
+        p.flag = false;
         c.SendSignal(this.response);
     }
     
