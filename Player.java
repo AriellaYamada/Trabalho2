@@ -67,10 +67,10 @@ public class Player {
         //Verifica se alguém ganhou
         while (game.turn != 42) {
             //frame.UpdateButtons(this);
-
+            this.frame.UpdateButtons(this);
             switch (game.turn){
+                
                 case 1:
-                    this.frame.UpdateButtons(this);
                     wait(15);
                     break;
                 case 2:
