@@ -102,7 +102,7 @@ public class Graphics{
         
         return pane;
     }
-    public Scene Game() {
+    public Scene Game(Player p) {
 
         // MONTA A TELA DO JOGADOR/SERVIDOR
         StackPane playerPane = new StackPane();
@@ -132,7 +132,8 @@ public class Graphics{
         grid.setPrefSize(450, 450);
         grid.setMaxSize(3000, 3000);
         playerPane.getChildren().add(org);
-
+        
+        UpdateButtons(p);
         return pane;
     }
     
