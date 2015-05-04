@@ -72,6 +72,7 @@ public class Graphics{
         } catch (InterruptedException ex) {
             Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     private void ChooseMark (Player p, int mark) {
@@ -134,8 +135,7 @@ public class Graphics{
         grid.setPrefSize(450, 450);
         grid.setMaxSize(3000, 3000);
         playerPane.getChildren().add(org);
-        
-        UpdateButtons(p);
+       
         return pane;
     }
     
@@ -157,18 +157,20 @@ public class Graphics{
         btn.setOnAction(event1 -> {
             p.ip = ipEntry.getText();
             p.port = Integer.parseInt(portEntry.getText());
+            
             try {
                 p.connection.CreateClient(p.ip, 12345);
+            } catch (IOException ex) {
+                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 
                 ReceiveMessage accept = new ReceiveMessage(p.connection.signalIn);
                 p.order = Integer.parseInt(accept.run());
                 //String answer = accept.run();
                 //if ("ready".equals(answer))
-                    StartGame(p);
+                StartGame(p);
                 
-            } catch (IOException ex) {
-                Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
         });
         
         org.setAlignment(Pos.CENTER);

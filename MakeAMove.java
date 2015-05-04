@@ -20,8 +20,9 @@ public class MakeAMove implements Runnable {
     @Override
     public void run() {
         
+        //while (p.game.turn == p.mark)
         this.p.frame.UpdateButtons(p);
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     
