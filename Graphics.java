@@ -172,10 +172,9 @@ public class Graphics{
                 
                 ReceiveMessage accept = new ReceiveMessage(p.connection.signalIn);
                 p.order = Integer.parseInt(accept.run());
-                //String answer = accept.run();
-                //if ("ready".equals(answer))
-                
-                StartGame(p);
+                String answer = accept.run();
+                if ("ready".equals(answer))
+                    StartGame(p);
 
         });
         

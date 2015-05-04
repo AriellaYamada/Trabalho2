@@ -18,7 +18,9 @@ public class Round {
         p.connection.SendSignal(response);
         if (p.game.VerifyEnd() == 0)
             p.server.run(p);
+            if(p.game.VerifyEnd() != 0)
+                p.frame.PlayAgain(p);
         else
-            System.out.println("Jogador " + p.game.VerifyEnd() + "Ganhou");
+            p.frame.PlayAgain(p);
     }
 }
