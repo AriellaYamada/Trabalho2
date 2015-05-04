@@ -71,6 +71,7 @@ public class Player {
             switch (game.turn){
                 case 1:
                     this.frame.UpdateButtons(this);
+                    wait(15);
                     break;
                 case 2:
                     this.frame.DisableAll();
