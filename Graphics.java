@@ -208,41 +208,31 @@ public class Graphics{
                 btn[i].setDisable(false);
             }
         }
-        /*for (int i = 0; i < 9; i++) {
-            if (p.game.matrix[i] == 0) {
-                btn[i].setDisable(false);
-            } else if (p.game.matrix[i] == 1) {
-                btn[i].setDisable(true);
-                btn[i].setText("X");
-            } else if (p.game.matrix[i] == 2) {
-                btn[i].setDisable(true);
-                btn[i].setText("O");
-            }
-            
-        }*/
     }  
     
-    public Scene PlayAgain (Player p) {
+    public void ResetButtons () {
+        
+        for (int i = 0; i < 9; i++) {
+            btn[i].setText(" ");
+            btn[i].setDisable(false);
+        }
+    }
+    
+    public Scene PlayAgain (Player p, int winner) {
         StackPane st = new StackPane();
         Scene sn = new Scene(st, 300, 250);
         
         Label q = new Label("Do you want to play again?");
+        Label labelwinner = new Label("Player " + winner + " wins");
         Button yes = new Button("Yes");
         Button no = new Button("No");
         
-        yes.setOnAction(event-> {
-            try {
-                p.StartGame();
-            } catch (IOException ex) {
-                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
+        yes.setOnAction(event-> StartGame(p));
         
         no.setOnAction(event -> {
             try {
                 p.connection.CloseConnectionClient();
+                p.window.close();
             } catch (IOException ex) {
                 Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -250,9 +240,9 @@ public class Graphics{
         HBox h = new HBox(30);
         h.setAlignment(Pos.CENTER);
         h.getChildren().addAll(yes, no);
-        VBox v = new VBox();
+        VBox v = new VBox(20);
         v.setAlignment(Pos.CENTER);
-        v.getChildren().addAll(q, h);
+        v.getChildren().addAll(labelwinner, q, h);
         
         st.getChildren().add(v);
         

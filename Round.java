@@ -11,6 +11,7 @@ package trabalho2;
  */
 public class Round {
     private Player p;
+    private int Winner;
     public Round (Player p) {
         this.p = p;
     }
@@ -20,11 +21,18 @@ public class Round {
     }
     public void run(String response) {
         p.connection.SendSignal(response);
-        if (p.game.VerifyEnd() == 0)
+        Winner = p.game.VerifyEnd();
+        System.out.println("Winner: " + Winner);
+        if (Winner == 0) {
             p.server.run(p);
-            if(p.game.VerifyEnd() != 0)
-                p.frame.PlayAgain(p);
-        else
-            p.frame.PlayAgain(p);
+            Winner = p.game.VerifyEnd();
+            System.out.println("Winner: " + Winner);
+            if(Winner != 0)
+                p.window.setScene(p.frame.PlayAgain(p, Winner));
+                p.window.show();
+        } else {
+            p.window.setScene(p.frame.PlayAgain(p, Winner));
+            p.window.show();
+        }
     }
 }
