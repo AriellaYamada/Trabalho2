@@ -23,13 +23,16 @@ public class ReceiveMove {
     }
     
     public void run() {
-        
+        System.out.println("Esperando move");
         Scanner move = new Scanner(this.server);
         String teste = null;
-        while (!move.hasNextLine()){}    
+        while (!move.hasNextLine()){
+            continue;
+        }    
         teste = move.nextLine();
         
         g.ReceiveMove(Integer.parseInt(teste));
+        g.PrintMatrix();
         System.out.println(teste);
     }
 }

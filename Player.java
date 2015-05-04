@@ -61,8 +61,6 @@ public class Player {
         //Inicia a partida
         game = new Game(this.mark, order);
         server = new ReceiveMove(this.connection.signalIn, this.game);
-        MakeAMove localPlayer = new MakeAMove(this);
-        WaitForAMove serverPlayer = new WaitForAMove(this);
         frame.UpdateButtons(this);
         //Thread serverResponse = new Thread(server);
 
