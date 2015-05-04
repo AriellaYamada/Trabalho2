@@ -63,15 +63,14 @@ public class Player {
         server = new ReceiveMove(this.connection.signalIn, this.game);
         MakeAMove localPlayer = new MakeAMove(this);
         WaitForAMove serverPlayer = new WaitForAMove(this);
-        Thread move = new Thread(localPlayer);
-        Thread wait = new Thread(serverPlayer);
+        frame.UpdateButtons(this);
         //Thread serverResponse = new Thread(server);
 
         //serverResponse.start();
         //Verifica se alguém ganhou
         
        /* while (game.turn != 42) {
-            //frame.UpdateButtons(this);
+            
            System.out.println(game.turn);
             switch (game.turn){
                 case 1:
@@ -91,17 +90,14 @@ public class Player {
             }
             
         }*/
-        while (game.turn != 3) {
-            if (game.turn == this.mark) {
-                this.frame.UpdateButtons(this);
-                wait();
-                //move.start();
-            } else {
+        //while (game.turn != 3) {
+            if (game.turn != this.mark){
                 this.frame.DisableAll();
                 server.run();
+                this.frame.UpdateButtons(this);
             } 
                 
-        }
+        //}
 
         //Se ganhou
         if (game.VerifyEnd() == 1) {
