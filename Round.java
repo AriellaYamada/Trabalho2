@@ -14,6 +14,10 @@ public class Round {
     public Round (Player p) {
         this.p = p;
     }
+    
+    public void SetMatrix (int pos, int mark) {
+        p.game.matrix[pos] = mark;
+    }
     public void run(String response) {
         p.connection.SendSignal(response);
         if (p.game.VerifyEnd() == 0)

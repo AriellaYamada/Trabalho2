@@ -38,28 +38,27 @@ public class Graphics{
             btn[i].setId(Integer.valueOf(i).toString());
         }
         
-        btn[0].setOnAction(event -> BtnPress(p, btn[0]));
-        btn[1].setOnAction(event -> BtnPress(p, btn[1]));
-        btn[2].setOnAction(event -> BtnPress(p, btn[2]));
-        btn[3].setOnAction(event -> BtnPress(p, btn[3]));
-        btn[4].setOnAction(event -> BtnPress(p, btn[4]));
-        btn[5].setOnAction(event -> BtnPress(p, btn[5]));
-        btn[6].setOnAction(event -> BtnPress(p, btn[6]));
-        btn[7].setOnAction(event -> BtnPress(p, btn[7]));
-        btn[8].setOnAction(event -> BtnPress(p, btn[8]));
+        btn[0].setOnAction(event -> BtnPress(p, 0));
+        btn[1].setOnAction(event -> BtnPress(p, 1));
+        btn[2].setOnAction(event -> BtnPress(p, 2));
+        btn[3].setOnAction(event -> BtnPress(p, 3));
+        btn[4].setOnAction(event -> BtnPress(p, 4));
+        btn[5].setOnAction(event -> BtnPress(p, 5));
+        btn[6].setOnAction(event -> BtnPress(p, 6));
+        btn[7].setOnAction(event -> BtnPress(p, 7));
+        btn[8].setOnAction(event -> BtnPress(p, 8));
 
     }
     
-    private void BtnPress(Player p, Button bt){
-        UpdateButtons(p);
-        DisableAll();  
-        this.response = bt.getId();
-        if (p.mark == 1)
-            bt.setText("X");
-        else
-            bt.setText("O");
-        bt.setDisable(true);
+    private void BtnPress(Player p, int bt){
+        //UpdateButtons(p);
+        DisableAll();
+        //bt.setDisable(true);
+        
+        this.response = Integer.valueOf(bt).toString();
         Round r = new Round(p);
+        r.SetMatrix(bt, p.mark);
+        UpdateButtons(p);
         r.run(this.response);
         UpdateButtons(p);
         //p.flag = false;
@@ -199,14 +198,28 @@ public class Graphics{
     
     public void UpdateButtons (Player p) {
        
-        for (int i = 0; i < 9; i++) {
-            if (p.game.matrix[i] == 0)
-                btn[i].setDisable(false);
-            else if (p.game.matrix[i] == 1)
+        for (int i = 0; i < 9; i++){
+            btn[i].setDisable(true);
+            if(p.game.matrix[i] == 1){
                 btn[i].setText("X");
-            else if (p.game.matrix[i] == 2)
+            } else if(p.game.matrix[i] == 2){
                 btn[i].setText("O");
+            } else {
+                btn[i].setDisable(false);
+            }
         }
+        /*for (int i = 0; i < 9; i++) {
+            if (p.game.matrix[i] == 0) {
+                btn[i].setDisable(false);
+            } else if (p.game.matrix[i] == 1) {
+                btn[i].setDisable(true);
+                btn[i].setText("X");
+            } else if (p.game.matrix[i] == 2) {
+                btn[i].setDisable(true);
+                btn[i].setText("O");
+            }
+            
+        }*/
     }  
     
     public Scene PlayAgain (Player p) {
