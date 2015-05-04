@@ -19,6 +19,7 @@ public class WaitForAMove implements Runnable{
     public void run() {
         
         this.p.frame.DisableAll();
+        while (p.flag);
         //Thread test = new Thread(this.p.server);
         //test.start();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -72,8 +72,11 @@ public class Player {
                 server.run();
                 this.frame.UpdateButtons(this);
             } else {
-                while (this.flag)
-                    System.out.println("Minha vez");
+                System.out.println("Minha vez");
+                WaitForAMove wfam = new WaitForAMove(this);
+                Thread tr = new Thread(wfam);
+                tr.start();
+                tr.join();
             }
         }
         /*
