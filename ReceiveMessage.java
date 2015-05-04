@@ -1,17 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Ariella Yamada 8937034
+ * @author Carlos Schneider 9167910
+ * @author Márcio Campos 8937462
  */
+
 package trabalho2;
 
 import java.io.InputStream;
 import java.util.Scanner;
 
-/**
- *
- * @author ariellayamada
- */
 public class ReceiveMessage {
     public InputStream server;
     
@@ -19,6 +17,7 @@ public class ReceiveMessage {
         this.server = s;
     }
 
+    //Recebe mensagens do servidor
     public String run() {
         
         Scanner move = new Scanner(this.server);

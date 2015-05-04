@@ -1,28 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Ariella Yamada 8937034
+ * @author Carlos Schneider 9167910
+ * @author Márcio Campos 8937462
  */
+
 package trabalho2;
 
 import java.io.IOException;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- *
- * @author ariellayamada
- */
+//Classe que define todos os atributos e métodos do jogador local
 public class Player {
 
-    //public boolean type;
     public int mark;
-    public int points;
     public String ip;
     public int port;
     public int order;
-    public boolean flag;
-    //public int flagConnection;
     public Comm connection;
     public Graphics frame;
     public Game game;
@@ -31,34 +26,14 @@ public class Player {
     public ReceiveMove server;
     
     public Player(Stage st) throws IOException {
-        //this.type = type;
         connection = new Comm();
         window = st;
         frame = new Graphics(connection, this, st);
     }
 
-    public Scene ConnectPane() {
-        return frame.ConnectPane(this);
-    }
-
-    public Scene Init() {
-        return frame.init(this);
-    }
-
-    public String getMark() {
-        String m;
-        switch (this.mark) {
-            case 1:
-                m = "X";
-            default:
-                m = "O";
-        }
-        return m;
-    }
-
+    //Inicio da partida do jogador local
     public void StartGame() throws IOException, InterruptedException {
 
-        //Inicia a partida
         game = new Game(this.mark, order);
         server = new ReceiveMove(this.connection.signalIn, this.game);
 

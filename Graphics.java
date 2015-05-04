@@ -1,3 +1,10 @@
+/**
+ *
+ * @author Ariella Yamada 8937034
+ * @author Carlos Schneider 9167910
+ * @author Márcio Campos 8937462
+ */
+
 package trabalho2;
 
 import java.io.IOException;
@@ -15,29 +22,24 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/**
- *
- * @author Ariella Yamada   9999999
- * @author Carlos Schneider 9167910
- * @author Márcio Campos    9999999
- */
-public class Graphics{
+//Classe que monta todas as telas que são exibidas durante o jogo
+public class Graphics {
 
     public Button[] btn = new Button[9];
-   
+
     public String response;
     Stage secondaryStage;
-    
+
     public Graphics(Comm c, Player p, Stage ps) {
 
         secondaryStage = ps;
-        
-        //Cria os botões
+
+        //Cria os botões do jogo
         for (int i = 0; i < 9; i++) {
             btn[i] = new Button();
             btn[i].setId(Integer.valueOf(i).toString());
         }
-        
+
         btn[0].setOnAction(event -> BtnPress(p, 0));
         btn[1].setOnAction(event -> BtnPress(p, 1));
         btn[2].setOnAction(event -> BtnPress(p, 2));
@@ -49,36 +51,40 @@ public class Graphics{
         btn[8].setOnAction(event -> BtnPress(p, 8));
 
     }
-    
-    private void BtnPress(Player p, int bt){
-        //UpdateButtons(p);
+
+    //Define o que acontece a cada jogada
+    private void BtnPress(Player p, int bt) {
+
         DisableAll();
-        //bt.setDisable(true);
-        
+
         this.response = Integer.valueOf(bt).toString();
         Round r = new Round(p);
-        r.SetMatrix(bt, p.mark);
+        p.game.ReceiveMove(bt, p.mark);
         UpdateButtons(p);
+        //Espera a jogada do segundo player
         r.run(this.response);
         UpdateButtons(p);
         //p.flag = false;
-        
+
     }
-    
-    public void StartGame (Player p) {
-        
+
+    //Exibe a tela com o novo jogo
+    public void StartGame(Player p) {
+
         secondaryStage.setScene(Game(p));
         secondaryStage.show();
-        
-        if (p.order == 0 )
-           this.DisableAll();
-        
+
+        if (p.order == 0) {
+            this.DisableAll();
+        }
+
         try {
             p.StartGame();
-            if (p.order == 0)
+            if (p.order == 0) {
                 p.server.run(p);
+            }
             this.UpdateButtons(p);
-            
+
         } catch (IOException ex) {
             Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
@@ -86,50 +92,52 @@ public class Graphics{
         }
     }
 
-    private void ChooseMark (Player p, int mark) {
-       
+    //Método que define a função do botão de selecionar "x" e "o"
+    private void ChooseMark(Player p, int mark) {
+
         p.mark = mark;
         System.out.printf("Escolheu : %d", mark);
         secondaryStage.setScene(this.ConnectPane(p));
     }
-    
+
+    //Tela para selecionar "x" e "o"
     public Scene init(Player p) {
-        
-        
+
         StackPane choose = new StackPane();
         Scene pane = new Scene(choose, 300, 250);
-        
+
         Button x = new Button("x");
         Button o = new Button("o");
-        
+
         HBox t = new HBox(20);
         t.setAlignment(Pos.CENTER);
-        
+
         //1 = x
         //2 = o
-        
         x.setOnAction(event -> ChooseMark(p, 1));
         o.setOnAction(event -> ChooseMark(p, 2));
-        
+
         t.getChildren().addAll(x, o);
-        
+
         choose.getChildren().add(t);
-        
+
         return pane;
     }
+
+    //Tela do jogo
     public Scene Game(Player p) {
 
         StackPane playerPane = new StackPane();
 
         Scene pane = new Scene(playerPane, 450, 450);
-        
+
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(5));
 
         int k = 0;
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 btn[k].setPrefSize(150, 150);
                 btn[k].setMaxSize(1000, 1000);
@@ -138,97 +146,106 @@ public class Graphics{
                 grid.add(btn[k], j, i);
                 k++;
             }
+        }
         VBox org = new VBox(10);
         org.setAlignment(Pos.CENTER);
         org.getChildren().addAll(grid);
         grid.setPrefSize(450, 450);
         grid.setMaxSize(3000, 3000);
         playerPane.getChildren().add(org);
-       
+
         return pane;
     }
-    
-    public Scene ConnectPane (Player p) {
-        
+
+    //Tela de conexão com o servidor
+    public Scene ConnectPane(Player p) {
+
         StackPane player2Pane = new StackPane();
         Scene pane = new Scene(player2Pane, 500, 600);
         VBox org = new VBox(30);
 
-
         TextField ipEntry = new TextField();
-        //ipEntry.setPromptText("IP 192.168.0.1");
-        ipEntry.setText("172.26.227.78");
+        ipEntry.setPromptText("IP 192.168.0.1");
         TextField portEntry = new TextField();
-        //portEntry.setPromptText("12345");
-        portEntry.setText("12345");
+        portEntry.setPromptText("12345");
         Button btn = new Button("Conectar");
         btn.setDefaultButton(true);
         btn.setOnAction(event1 -> {
             p.ip = ipEntry.getText();
             p.port = Integer.parseInt(portEntry.getText());
-            
+
             try {
                 p.connection.CreateClient(p.ip, 12345);
             } catch (IOException ex) {
                 Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
             }
-                
-                ReceiveMessage accept = new ReceiveMessage(p.connection.signalIn);
-                p.order = Integer.parseInt(accept.run());
-                String answer = accept.run();
-                if ("ready".equals(answer))
-                    StartGame(p);
+            //Recebe se ele foi o primeiro a se conectar
+            ReceiveMessage accept = new ReceiveMessage(p.connection.signalIn);
+            p.order = Integer.parseInt(accept.run());
+            //Recebe resposta caso o segundo player já tenha se conectado
+            String answer = accept.run();
+            if ("ready".equals(answer)) {
+                //Chama o inicio do jogo
+                StartGame(p);
+            }
 
         });
-        
+
         org.setAlignment(Pos.CENTER);
         org.getChildren().addAll(ipEntry, portEntry, btn);
-        
+
         player2Pane.getChildren().add(org);
-        
+
         return pane;
-        
+
     }
-    
-    public void DisableAll () {
+
+    //Disabilita todos os botões do jogo
+    public void DisableAll() {
         for (int i = 0; i < 9; i++) {
             btn[i].setDisable(true);
         }
     }
-    
-    public void UpdateButtons (Player p) {
-       
-        for (int i = 0; i < 9; i++){
+
+    //Atualiza todos os botões do jogo
+    public void UpdateButtons(Player p) {
+
+        for (int i = 0; i < 9; i++) {
             btn[i].setDisable(true);
-            if(p.game.matrix[i] == 1){
+            if (p.game.matrix[i] == 1) {
                 btn[i].setText("X");
-            } else if(p.game.matrix[i] == 2){
+            } else if (p.game.matrix[i] == 2) {
                 btn[i].setText("O");
             } else {
                 btn[i].setDisable(false);
             }
         }
-    }  
-    
-    public void ResetButtons () {
-        
+    }
+
+    //Reseta os botões do jogo
+    public void ResetButtons() {
+
         for (int i = 0; i < 9; i++) {
             btn[i].setText(" ");
             btn[i].setDisable(false);
         }
     }
-    
-    public Scene PlayAgain (Player p, int winner) {
+
+    //Tela de fim de jogo
+    public Scene PlayAgain(Player p, int winner) {
         StackPane st = new StackPane();
         Scene sn = new Scene(st, 300, 250);
-        
+        Label labelwinner;
         Label q = new Label("Do you want to play again?");
-        Label labelwinner = new Label("Player " + winner + " wins");
+        if (winner == 3)
+            labelwinner = new Label("Draw");
+        else
+            labelwinner = new Label("Player " + winner + " wins");
         Button yes = new Button("Yes");
         Button no = new Button("No");
-        
-        yes.setOnAction(event-> StartGame(p));
-        
+
+        yes.setOnAction(event -> StartGame(p));
+
         no.setOnAction(event -> {
             try {
                 p.connection.CloseConnectionClient();
@@ -243,9 +260,9 @@ public class Graphics{
         VBox v = new VBox(20);
         v.setAlignment(Pos.CENTER);
         v.getChildren().addAll(labelwinner, q, h);
-        
+
         st.getChildren().add(v);
-        
+
         return sn;
     }
 }

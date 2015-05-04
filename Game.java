@@ -1,18 +1,22 @@
-package trabalho2;
-
 /**
  *
- * @author ariellayamada
+ * @author Ariella Yamada   8937034
+ * @author Carlos Schneider 9167910
+ * @author Márcio Campos    8937462
  */
+
+package trabalho2;
+
+//Clase que lida com todas as funcionalidades e atributos do jogo
 public class Game {
 
     public int matrix[];
-    public int nrounds;
-    public int draw;
     public int turn;
 
     public Game(int mark, int order) {
+        //Inicializa a matriz que define os campos do jogo
         matrix = new int[9];
+        //Seta quem inicia o jogo a partir da mensagem recebida do servidor
         if (order == 0) {
             turn = mark;
         } else {
@@ -24,21 +28,12 @@ public class Game {
         }
     }
 
-    public boolean ReceiveMove(int move, int player) {
-        if (matrix[move] == 0) {
-            matrix[move] = 3 - player;
-            //System.out.println("Mudou para a vez de " + turn);
-            return true;
-        }
-        return false;
+    //Altera na matriz a jogada do player
+    public void ReceiveMove(int move, int player) {
+        matrix[move] = 3 - player;
     }
 
-    public void PrintMatrix() {
-        for (int i = 0; i < 9; i++) {
-            System.out.println(this.matrix[i] + " ");
-        }
-    }
-
+    //Verifica se alguém ganhou
     public int VerifyEnd() {
         if (matrix[0] != 0) {
             //Verifica primeira linha
@@ -66,6 +61,7 @@ public class Game {
         } else if (matrix[2] != 0 && matrix[2] == matrix[4] && matrix[4] == matrix[6]) {
             return matrix[2];
         }
+        //Verifica se deu velha
         for (int i = 0; i < 9; i++) {
             if (matrix[i] == 0) {
                 return 0;

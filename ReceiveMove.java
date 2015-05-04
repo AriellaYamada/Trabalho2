@@ -1,17 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Ariella Yamada 8937034
+ * @author Carlos Schneider 9167910
+ * @author Márcio Campos 8937462
  */
+
 package trabalho2;
 
 import java.io.InputStream;
 import java.util.Scanner;
 
-/**
- *
- * @author ariellayamada
- */
+//Classe que define as jogadas do outro player dentro da rodada
 public class ReceiveMove {
 
     public InputStream server;
@@ -22,6 +21,7 @@ public class ReceiveMove {
         this.g = g;
     }
     
+    //Aguarda a rodada do outro player e a recebe
     public void run(Player p) {
         System.out.println("Esperando move");
         Scanner move = new Scanner(this.server);
@@ -29,7 +29,6 @@ public class ReceiveMove {
         while (!move.hasNextLine());    
         teste = move.nextLine();
         
-        if(g.ReceiveMove(Integer.parseInt(teste), p.mark) == true)
-            System.out.println("Recebeu " + teste);
+        System.out.println("Recebeu " + teste);
     }
 }
