@@ -24,9 +24,9 @@ public class Game {
         }
     }
 
-    public boolean ReceiveMove(int move) {
+    public boolean ReceiveMove(int move, int player) {
         if (matrix[move] == 0) {
-            matrix[move] = turn;
+            matrix[move] = 3 - player;
             //System.out.println("Mudou para a vez de " + turn);
             return true;
         }

@@ -15,9 +15,10 @@ public class Round {
         this.p = p;
     }
     public void run(String response) {
-        p.frame.DisableAll();
         p.connection.SendSignal(response);
-        p.server.run();
-        p.frame.UpdateButtons(this.p);
+        if (p.game.VerifyEnd() == 0)
+            p.server.run(p);
+        else
+            System.out.println("Jogador " + p.game.VerifyEnd() + "Ganhou");
     }
 }

@@ -51,7 +51,8 @@ public class Graphics{
     }
     
     private void BtnPress(Player p, Button bt){
-
+        UpdateButtons(p);
+        DisableAll();  
         this.response = bt.getId();
         if (p.mark == 1)
             bt.setText("X");
@@ -59,6 +60,7 @@ public class Graphics{
             bt.setText("O");
         Round r = new Round(p);
         r.run(this.response);
+        UpdateButtons(p);
         //p.flag = false;
         
     }
@@ -152,7 +154,7 @@ public class Graphics{
 
         TextField ipEntry = new TextField();
         //ipEntry.setPromptText("IP 192.168.0.1");
-        ipEntry.setText("192.168.0.8");
+        ipEntry.setText("172.26.227.78");
         TextField portEntry = new TextField();
         //portEntry.setPromptText("12345");
         portEntry.setText("12345");

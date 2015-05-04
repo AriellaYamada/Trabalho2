@@ -22,14 +22,14 @@ public class ReceiveMove {
         this.g = g;
     }
     
-    public void run() {
+    public void run(Player p) {
         System.out.println("Esperando move");
         Scanner move = new Scanner(this.server);
         String teste = null;
         while (!move.hasNextLine());    
         teste = move.nextLine();
         
-        if(g.ReceiveMove(Integer.parseInt(teste)) == true)
+        if(g.ReceiveMove(Integer.parseInt(teste), p.mark) == true)
             System.out.println("Recebeu " + teste);
     }
 }
