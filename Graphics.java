@@ -118,7 +118,7 @@ public class Graphics{
 
         Scene pane = new Scene(playerPane, 450, 450);
         
-        DisableAll();
+        //DisableAll();
         
         GridPane grid = new GridPane();
         grid.setHgap(10);
@@ -169,10 +169,9 @@ public class Graphics{
                 p.connection.CreateClient(p.ip, 12345);
                 
                 ReceiveMessage accept = new ReceiveMessage(p.connection.signalIn);
-                
+                p.order = Integer.parseInt(accept.run());
                 String answer = accept.run();
                 if ("ready".equals(answer))
-                    p.order = Integer.parseInt(accept.run());
                     StartGame(p);
                 
             } catch (IOException ex) {

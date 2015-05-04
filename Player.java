@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  * @author ariellayamada
  */
 public class Player {
-    
+
     //public boolean type;
     public int mark;
     public int points;
@@ -26,20 +26,20 @@ public class Player {
     public Graphics frame;
     public Game game;
     public Stage window;
-    
-    public Player(Stage st) throws IOException{
+
+    public Player(Stage st) throws IOException {
         //this.type = type;
         connection = new Comm();
         window = st;
 
         frame = new Graphics(connection, this, st);
-    } 
-    
-    public Scene ConnectPane () {
+    }
+
+    public Scene ConnectPane() {
         return frame.ConnectPane(this);
     }
-    
-    public Scene Init () {
+
+    public Scene Init() {
         return frame.init(this);
     }
 
@@ -53,38 +53,40 @@ public class Player {
         }
         return m;
     }
-    
-    public void StartGame () throws IOException, InterruptedException {
-        
+
+    public void StartGame() throws IOException, InterruptedException {
+
         //Inicia a partida
         game = new Game(this.mark, order);
         ReceiveMove server = new ReceiveMove(this.connection.signalIn, this.game);
         //Thread serverResponse = new Thread(server);
-        
+
         //serverResponse.start();
-        
         //Verifica se alguém ganhou
-        
-       while (game.VerifyEnd() == 0) {
-        //frame.UpdateButtons(this.game.matrix);
-        //if(game.VerifyEnd() == 0) {
-           System.out.println(this.game.turn);
-           if (this.game.turn == this.mark) {
-               this.frame.UpdateButtons(this.game.matrix);
-               //this.wait(15);
-   
-           } else {
-               this.frame.DisableAll();
-               server.run();
-           }
+        while (game.turn != 3) {
+            //frame.UpdateButtons(this.game.matrix);
+            if (game.VerifyEnd() != 0) {
+                game.turn = 3;
+            }
+
+            System.out.println(this.game.turn);
+            if (this.game.turn == this.mark) {
+                this.frame.UpdateButtons(this.game.matrix);
+                //this.wait(15);
+
+            } else {
+                this.frame.DisableAll();
+                server.run();
+            }
+
         }
-           
+
         //Se ganhou
         if (game.VerifyEnd() == 1) {
             this.points++;
             this.game.nrounds++;
-        //Se empatou
-            
+            //Se empatou
+
         } else if (game.VerifyEnd() == 3) {
             this.game.draw++;
             this.game.nrounds++;
