@@ -52,12 +52,12 @@ public class Graphics{
     
     private void BtnPress(Player p, Button bt, Comm c){
 
-        //DisableAll();
+        DisableAll();
         this.response = bt.getId();
 
         bt.setText(p.getMark());
         p.game.turn = 3 - p.game.turn;
-
+        c.SendSignal(this.response);
     }
     
     public void StartGame (Player p) {
