@@ -24,7 +24,6 @@ public class Round {
             //Espera jogada do outro player
             p.server.run(p);
             Winner = p.game.VerifyEnd();
-            System.out.println("Winner: " + Winner);
             if(Winner != 0)
                 p.window.setScene(p.frame.PlayAgain(p, Winner));
                 p.window.show();

@@ -30,7 +30,7 @@ public class Game {
 
     //Altera na matriz a jogada do player
     public void ReceiveMove(int move, int player) {
-        matrix[move] = 3 - player;
+        matrix[move] = player;
     }
 
     //Verifica se alguém ganhou

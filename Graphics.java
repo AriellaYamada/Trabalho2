@@ -96,7 +96,7 @@ public class Graphics {
     private void ChooseMark(Player p, int mark) {
 
         p.mark = mark;
-        System.out.printf("Escolheu : %d", mark);
+        System.out.printf("Pos : %d", mark);
         secondaryStage.setScene(this.ConnectPane(p));
     }
 
@@ -161,21 +161,20 @@ public class Graphics {
     public Scene ConnectPane(Player p) {
 
         StackPane player2Pane = new StackPane();
-        Scene pane = new Scene(player2Pane, 500, 600);
+        Scene pane = new Scene(player2Pane, 450, 450);
         VBox org = new VBox(30);
 
         TextField ipEntry = new TextField();
+        ipEntry.setMaxWidth(250);
+                
         ipEntry.setPromptText("IP 192.168.0.1");
-        TextField portEntry = new TextField();
-        portEntry.setPromptText("12345");
-        Button btn = new Button("Conectar");
+        Button btn = new Button("Connect");
         btn.setDefaultButton(true);
         btn.setOnAction(event1 -> {
             p.ip = ipEntry.getText();
-            p.port = Integer.parseInt(portEntry.getText());
 
             try {
-                p.connection.CreateClient(p.ip, 12345);
+                p.connection.CreateClient(p.ip);
             } catch (IOException ex) {
                 Logger.getLogger(Graphics.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -192,7 +191,7 @@ public class Graphics {
         });
 
         org.setAlignment(Pos.CENTER);
-        org.getChildren().addAll(ipEntry, portEntry, btn);
+        org.getChildren().addAll(ipEntry, btn);
 
         player2Pane.getChildren().add(org);
 
@@ -240,7 +239,10 @@ public class Graphics {
         if (winner == 3)
             labelwinner = new Label("Draw");
         else
-            labelwinner = new Label("Player " + winner + " wins");
+            if (winner == p.mark)
+                labelwinner = new Label("You win!!!");
+            else
+                labelwinner = new Label("You loose!!!");
         Button yes = new Button("Yes");
         Button no = new Button("No");
 

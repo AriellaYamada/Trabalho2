@@ -19,11 +19,11 @@ public class Comm {
     public PrintWriter signalOut;
     public InputStream signalIn;
 
-    public void CreateClient(String ip, int port) throws IOException {
+    public void CreateClient(String ip) throws IOException {
 
         //Inicia a conexão com o servidor
-        System.out.println("Tentando conex�o em: "+ip+" : "+port);
-        client = new Socket(ip, port);
+        System.out.println("Tentando conex�o em: "+ip+" : "+12345);
+        client = new Socket(ip, 12345);
         //"Porta" de saida de mensagens para o servidor
         signalOut = new PrintWriter(client.getOutputStream(), true);
         //"Porta" de entrada de mensagens do servidor

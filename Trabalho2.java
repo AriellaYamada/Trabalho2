@@ -31,7 +31,7 @@ public class Trabalho2 extends Application{
     @Override
     public void start(Stage primaryStage) {
 
-        btn = new Button("Jogar");
+        btn = new Button("Play");
         
         btn.setOnAction(event -> this.btnPressed(primaryStage));
        
@@ -44,7 +44,7 @@ public class Trabalho2 extends Application{
         root.getChildren().add(boxButtons);
         Scene scene = new Scene(root, 300, 250);
         
-        primaryStage.setTitle("Jogo da Velha");
+        primaryStage.setTitle("Tic Tac Toe");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

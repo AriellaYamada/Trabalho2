@@ -23,12 +23,13 @@ public class ReceiveMove {
     
     //Aguarda a rodada do outro player e a recebe
     public void run(Player p) {
-        System.out.println("Esperando move");
+        System.out.println("Waiting move");
         Scanner move = new Scanner(this.server);
-        String teste = null;
+        String pos = null;
         while (!move.hasNextLine());    
-        teste = move.nextLine();
+        pos = move.nextLine();
         
-        System.out.println("Recebeu " + teste);
+        p.game.ReceiveMove(Integer.parseInt(pos), (3 - p.mark));
+        System.out.println("Received " + pos);
     }
 }
