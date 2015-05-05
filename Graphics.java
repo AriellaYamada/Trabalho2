@@ -59,8 +59,6 @@ public class Graphics {
 
         this.response = Integer.valueOf(bt).toString();
         Round r = new Round(p);
-        p.game.ReceiveMove(bt, p.mark);
-        UpdateButtons(p);
         //Espera a jogada do segundo player
         r.run(this.response);
         UpdateButtons(p);
